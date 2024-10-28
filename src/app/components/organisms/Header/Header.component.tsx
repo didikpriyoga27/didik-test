@@ -14,20 +14,22 @@ import SearchInputComponent from "../../molecules/SearchInput";
  */
 const HeaderComponent = (): ReactElement => {
   return (
-    <header className="flex items-center justify-between py-4 px-16 w-full">
-      <Image
-        src="/next.svg"
-        alt="Next.js logo"
-        width={180}
-        height={38}
-        priority
-        className="dark:invert"
-      />
-      <TitleComponent>{"Products"}</TitleComponent>
-      <div className="flex gap-2">
-        <SearchInputComponent />
-        <ButtonComponent>Cart</ButtonComponent>
-        <ButtonComponent>Dark Mode</ButtonComponent>
+    <header className="flex py-4 w-full justify-center">
+      <div className="flex items-center justify-between w-11/12">
+        <Image
+          src="/next.svg"
+          alt="Next.js logo"
+          width={180}
+          height={38}
+          priority
+          className="dark:invert"
+        />
+        <TitleComponent>{"Products"}</TitleComponent>
+        <div className="flex gap-2">
+          <SearchInputComponent />
+          <ButtonComponent>Cart</ButtonComponent>
+          <ButtonComponent>Dark Mode</ButtonComponent>
+        </div>
       </div>
     </header>
   );

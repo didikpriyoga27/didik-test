@@ -1,6 +1,7 @@
 "use client";
 
 import useProductListHook from "../../hooks/useProductList.hook";
+import ProductPaginationComponent from "../ProductPagination";
 import TableBodyComponent from "./components/TableBody";
 import TableHeaderComponent from "./components/TableHeader";
 
@@ -18,10 +19,13 @@ const ProductListComponent = (): JSX.Element => {
   const { table } = useProductListHook();
 
   return (
-    <table className="w-11/12 bg-slate-300 text-background mx-auto my-4">
-      <TableHeaderComponent table={table} />
-      <TableBodyComponent table={table} />
-    </table>
+    <section className="w-11/12 mx-auto">
+      <table className="w-full bg-slate-300 text-background my-4">
+        <TableHeaderComponent table={table} />
+        <TableBodyComponent table={table} />
+      </table>
+      <ProductPaginationComponent table={table} />
+    </section>
   );
 };
 
