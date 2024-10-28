@@ -6,14 +6,22 @@ import TableBodyComponent from "./components/TableBody";
 import TableHeaderComponent from "./components/TableHeader";
 
 /**
- * A component that renders a table of products.
+ * A component that renders a table with a list of products.
  *
- * It calls the useProductListHook hook to get the table data and
- * props, and then renders the table with the TableHeaderComponent
- * and TableBodyComponent.
+ * The component uses the `useProductListHook` hook to generate the table data.
+ * The hook returns an object with the following properties:
+ * - data: The list of products.
+ * - columns: The columns of the table.
+ * - table: The table instance.
  *
- * @returns {JSX.Element} - A JSX element representing the table
- * component.
+ * The component renders a table with the following structure:
+ * - The first row contains table cells with the column headers.
+ * - The second row contains table cells with the table data.
+ * - The third row contains a pagination component.
+ *
+ * The component styles the table and pagination component using Tailwind CSS.
+ *
+ * @returns {JSX.Element} A JSX element representing the table component.
  */
 const ProductListComponent = (): JSX.Element => {
   const { table } = useProductListHook();
