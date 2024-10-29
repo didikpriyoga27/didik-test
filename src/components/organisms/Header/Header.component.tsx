@@ -1,4 +1,5 @@
 import { CartIcon } from "@/components/atoms/Icons";
+import DarkModeToggleComponent from "@/components/molecules/DarkModeToggle/DarkModeToggle.component";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactElement } from "react";
@@ -32,7 +33,7 @@ const HeaderComponent = (): ReactElement => {
           <ButtonComponent href={"/cart"}>
             <CartIcon className="dark:invert" />
           </ButtonComponent>
-          {/* <DarkModeToggleComponent /> */}
+          <DarkModeToggleComponent />
         </div>
       </div>
     </header>

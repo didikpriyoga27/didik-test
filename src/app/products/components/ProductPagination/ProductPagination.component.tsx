@@ -13,7 +13,7 @@ function ProductPaginationComponent({
   table,
 }: IProductPaginationComponentProps) {
   return (
-    <section className="flex items-center justify-end gap-2 mb-8">
+    <section className="flex items-center justify-end gap-2">
       <button className="border rounded p-1">{"<"}</button>
       <span className="flex items-center gap-1">
         <div>Page</div>

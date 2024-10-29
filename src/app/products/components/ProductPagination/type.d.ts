@@ -1,5 +1,5 @@
-import useProductListHook from "@/app/products/hooks/useProductList.hook";
+import { Table } from "@tanstack/react-table";
 
 export interface IProductPaginationComponentProps {
-  table: ReturnType<typeof useProductListHook>["table"];
+  table: Table<Product>;
 }

@@ -28,7 +28,7 @@ const ButtonComponent = ({
   href,
 }: IButtonComponentProps): ReactElement => {
   const defaultClassName =
-    "bg-gray-200 dark:bg-gray-800 rounded-full py-2 px-4 line-clamp-1 text-foreground";
+    "bg-gray-200 dark:bg-gray-800 rounded-full py-2 px-4 line-clamp-1 text-foreground dark:text-background";
   if (href) {
     return (
       <Link href={href} className={defaultClassName}>

@@ -2,7 +2,7 @@
 
 import { DarkModeIcon } from "@/components/atoms/Icons";
 import { useTheme } from "next-themes";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 
 const DarkModeToggleComponent = () => {
   const { theme, systemTheme, setTheme } = useTheme();
@@ -17,14 +17,6 @@ const DarkModeToggleComponent = () => {
       setTheme("dark");
     }
   }, [setTheme, systemTheme, theme]);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      handleToggleTheme();
-    }, 2000);
-
-    return () => clearInterval(intervalId);
-  }, [handleToggleTheme]);
 
   return (
     <button className={defaultClassName} onClick={handleToggleTheme}>

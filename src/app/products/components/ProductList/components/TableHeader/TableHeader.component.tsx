@@ -24,7 +24,7 @@ const TableHeaderComponent = ({
           {headerGroup.headers.map((header) => (
             <th
               key={header.id}
-              className="py-2 border-r border-solid border-background last:border-r-0"
+              className="p-2 border-r border-solid border-background last:border-r-0"
             >
               {header.isPlaceholder
                 ? null

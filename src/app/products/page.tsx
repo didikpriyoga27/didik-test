@@ -13,7 +13,7 @@ import ProductListComponent from "./components/ProductList";
  */
 const Products = (): ReactElement => {
   return (
-    <div>
+    <div className="bg-background dark:bg-foreground py-4">
       <HeaderComponent />
       <ProductHeaderComponent />
       <Suspense>

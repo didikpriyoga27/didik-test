@@ -44,8 +44,8 @@ const useQueryProductsHook = () => {
     [createQueryString, pathname, router]
   );
 
-  const incrementPage = () => setPage(page + 1);
-  const decrementPage = () => setPage(page - 1);
+  const incrementPage = useCallback(() => setPage(page + 1), [page, setPage]);
+  const decrementPage = useCallback(() => setPage(page - 1), [page, setPage]);
 
   const fetchProducts = useCallback(async () => {
     const response = await axios.get(

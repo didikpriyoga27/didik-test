@@ -1,5 +1,6 @@
 "use client";
 
+import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import useProductListHook from "../../hooks/useProductList.hook";
 import ProductPaginationComponent from "../ProductPagination";
 import TableBodyComponent from "./components/TableBody";
@@ -24,11 +25,16 @@ import TableHeaderComponent from "./components/TableHeader";
  * @returns {JSX.Element} A JSX element representing the table component.
  */
 const ProductListComponent = (): JSX.Element => {
-  const { table } = useProductListHook();
+  const { data, columns } = useProductListHook();
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  });
 
   return (
     <section className="w-11/12 mx-auto">
-      <table className="w-full bg-slate-300 text-background my-4">
+      <table className="w-full bg-slate-800 dark:bg-slate-600 text-background my-4 rounded-md">
         <TableHeaderComponent table={table} />
         <TableBodyComponent table={table} />
       </table>
