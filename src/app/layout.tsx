@@ -1,3 +1,4 @@
+import { TanstackQueryProvider } from "@/providers";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import localFont from "next/font/local";
@@ -42,7 +43,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <TanstackQueryProvider>{children}</TanstackQueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

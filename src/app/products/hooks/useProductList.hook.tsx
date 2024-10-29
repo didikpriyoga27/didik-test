@@ -1,6 +1,6 @@
 "use client";
 
-import ButtonComponent from "@/app/components/atoms/Button";
+import ButtonComponent from "@/components/atoms/Button";
 import {
   createColumnHelper,
   getCoreRowModel,
@@ -8,8 +8,9 @@ import {
 } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import { useMemo } from "react";
-import products from "../mock/products.json";
 import { Column, Product } from "../type";
+
+import useQueryProductsHook from "./useQueryProducts.hook";
 
 /**
  * Custom hook for generating a table with a list of products.
@@ -25,9 +26,11 @@ import { Column, Product } from "../type";
  * The hook also uses the `useReactTable` hook to generate the table instance.
  */
 const useProductListHook = () => {
+  const { productsData } = useQueryProductsHook();
+
   const data: Product[] = useMemo(
     () =>
-      products.map((product) => ({
+      (productsData ?? []).map((product) => ({
         id: product.id,
         title: product.title,
         description: product.description,
@@ -36,7 +39,7 @@ const useProductListHook = () => {
         creationAt: product.creationAt,
         updatedAt: product.updatedAt,
       })),
-    []
+    [productsData]
   );
 
   const columnHelper = createColumnHelper<Column>();
@@ -65,11 +68,11 @@ const useProductListHook = () => {
       }),
       columnHelper.accessor("creationAt", {
         header: "Created At",
-        cell: (info) => dayjs(info.getValue()).format("MMM D, YYYY h:mm A"),
+        cell: (info) => dayjs(info.getValue()).format("MMM D, YYYY h:mm a"),
       }),
       columnHelper.accessor("updatedAt", {
         header: "Updated At",
-        cell: (info) => dayjs(info.getValue()).format("MMM D, YYYY h:mm A"),
+        cell: (info) => dayjs(info.getValue()).format("MMM D, YYYY h:mm a"),
       }),
       columnHelper.accessor("actions", {
         header: "Actions",

@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import HeaderComponent from "./components/organisms/Header";
+import HeaderComponent from "../components/organisms/Header";
 import ProductListComponent from "./products/components/ProductList";
 
 /**
