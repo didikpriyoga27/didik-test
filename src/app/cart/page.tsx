@@ -1,4 +1,5 @@
 import HeaderComponent from "@/components/organisms/Header";
+import CartFooterComponent from "./components/CartFooter";
 import CartListComponent from "./components/CartList";
 
 const Cart = () => {
@@ -6,6 +7,7 @@ const Cart = () => {
     <div className="grid grid-rows-[auto_1fr_auto]">
       <HeaderComponent />
       <CartListComponent />
+      <CartFooterComponent />
     </div>
   );
 };

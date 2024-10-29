@@ -9,7 +9,8 @@ const CartItemComponent = ({ item }: ICartitemComponentProps) => {
           {item.qty} x ${item.price}
         </p>
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-end">
+        <span className="pr-16">${item.qty * item.price}</span>
         <button className="px-4 rounded">-</button>
         <span className="px-2">{item.qty}</span>
         <button className="px-4 rounded">+</button>

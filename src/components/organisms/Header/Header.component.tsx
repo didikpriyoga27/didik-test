@@ -15,14 +15,16 @@ const HeaderComponent = (): ReactElement => {
   return (
     <header className="flex py-4 w-full justify-center">
       <div className="flex items-center justify-between w-11/12">
-        <Image
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-          className="dark:invert"
-        />
+        <a href="/products">
+          <Image
+            src="/next.svg"
+            alt="Next.js logo"
+            width={180}
+            height={38}
+            priority
+            className="dark:invert cursor-pointer"
+          />
+        </a>
         <div className="flex gap-2">
           <SearchInputComponent />
           <ButtonComponent href={"/cart"}>Cart</ButtonComponent>
