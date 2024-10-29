@@ -36,6 +36,11 @@ const columns = [
     size: 300,
     cell: (info) => info.getValue(),
   }),
+  columnHelper.accessor("category", {
+    header: "Category",
+    size: 80,
+    cell: (info) => info.getValue().name,
+  }),
   columnHelper.accessor("price", {
     header: "Price",
     size: 60,
