@@ -1,6 +1,10 @@
+"use client";
+
 import ButtonComponent from "@/components/atoms/Button";
 import { SearchIcon } from "@/components/atoms/Icons";
 import InputComponent from "@/components/atoms/Input";
+import useQueryStringHook from "@/hooks/useQueryString.hook";
+import { useCallback, useRef } from "react";
 
 /**
  * A component that renders a search input and a search button.
@@ -8,10 +12,21 @@ import InputComponent from "@/components/atoms/Input";
  * @returns A JSX element representing the search input component.
  */
 const SearchInputComponent = () => {
+  const keywordRef = useRef<string>("");
+
+  const { setSearchQueryString } = useQueryStringHook();
+
+  const handleSubmit = useCallback(() => {
+    setSearchQueryString(keywordRef.current);
+  }, [setSearchQueryString]);
+
   return (
     <div className="flex items-center gap-2">
-      <InputComponent />
-      <ButtonComponent>
+      <InputComponent
+        onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+        onChange={(e) => (keywordRef.current = e.target.value)}
+      />
+      <ButtonComponent onClick={handleSubmit}>
         <SearchIcon className="dark:invert" />
       </ButtonComponent>
     </div>

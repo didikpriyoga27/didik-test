@@ -1,7 +1,7 @@
 "use client";
 
 import ButtonComponent from "@/components/atoms/Button";
-import { DeleteIcon, EditIcon } from "@/components/atoms/Icons";
+import { CartIcon, DeleteIcon, EditIcon } from "@/components/atoms/Icons";
 import { createColumnHelper } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import { useMemo } from "react";
@@ -60,9 +60,12 @@ const columns = [
     header: "Actions",
     size: 100,
     cell: (info) => (
-      <div className="flex gap-2 justify-center">
+      <div className="flex gap-2 justify-center flex-wrap">
         <ButtonComponent href={`/products/${info.row.original.id}`}>
           <EditIcon className="dark:invert" />
+        </ButtonComponent>
+        <ButtonComponent>
+          <CartIcon className="dark:invert" />
         </ButtonComponent>
         <ButtonComponent>
           <DeleteIcon className="dark:invert" />
