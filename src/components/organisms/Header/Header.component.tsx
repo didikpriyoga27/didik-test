@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ReactElement } from "react";
 import ButtonComponent from "../../atoms/Button";
 import SearchInputComponent from "../../molecules/SearchInput";
@@ -15,7 +16,7 @@ const HeaderComponent = (): ReactElement => {
   return (
     <header className="flex py-4 w-full justify-center">
       <div className="flex items-center justify-between w-11/12">
-        <a href="/products">
+        <Link href="/products">
           <Image
             src="/next.svg"
             alt="Next.js logo"
@@ -24,7 +25,7 @@ const HeaderComponent = (): ReactElement => {
             priority
             className="dark:invert cursor-pointer"
           />
-        </a>
+        </Link>
         <div className="flex gap-2">
           <SearchInputComponent />
           <ButtonComponent href={"/cart"}>Cart</ButtonComponent>
