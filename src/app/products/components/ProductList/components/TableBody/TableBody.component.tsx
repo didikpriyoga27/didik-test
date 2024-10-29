@@ -1,4 +1,6 @@
 import { flexRender } from "@tanstack/react-table";
+import Image from "next/image";
+import defaultImage from "../../../../../../../public/default.png";
 import { ITableBodyComponentProps } from "./type";
 
 /**
@@ -18,12 +20,27 @@ const TableBodyComponent = ({
   table,
 }: ITableBodyComponentProps): JSX.Element => {
   return (
-    <tbody>
+    <tbody className="border-t border-b border-solid border-background">
       {table.getRowModel().rows.map((row) => (
         <tr key={row.id}>
           {row.getVisibleCells().map((cell) => (
-            <td key={cell.id} className="text-center py-2">
-              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+            <td
+              key={cell.id}
+              className="border-r border-solid border-background text-center py-2 last:border-r-0"
+            >
+              {cell.column.id === "images" ? (
+                <div className="flex items-center justify-center">
+                  <Image
+                    src={defaultImage}
+                    alt={"default image"}
+                    className="w-16 h-16 object-cover rounded-md"
+                    width={64}
+                    height={64}
+                  />
+                </div>
+              ) : (
+                flexRender(cell.column.columnDef.cell, cell.getContext())
+              )}
             </td>
           ))}
         </tr>

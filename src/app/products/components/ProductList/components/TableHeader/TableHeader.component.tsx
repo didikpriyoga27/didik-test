@@ -22,7 +22,10 @@ const TableHeaderComponent = ({
       {table.getHeaderGroups().map((headerGroup) => (
         <tr key={headerGroup.id}>
           {headerGroup.headers.map((header) => (
-            <th key={header.id} className="py-2">
+            <th
+              key={header.id}
+              className="py-2 border-r border-solid border-background last:border-r-0"
+            >
               {header.isPlaceholder
                 ? null
                 : flexRender(

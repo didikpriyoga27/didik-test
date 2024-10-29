@@ -6,6 +6,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import dayjs from "dayjs";
 import { useMemo } from "react";
 import products from "../mock/products.json";
 import { Column, Product } from "../type";
@@ -32,6 +33,8 @@ const useProductListHook = () => {
         description: product.description,
         price: product.price,
         images: product.images,
+        creationAt: product.creationAt,
+        updatedAt: product.updatedAt,
       })),
     []
   );
@@ -59,6 +62,14 @@ const useProductListHook = () => {
       columnHelper.accessor("price", {
         header: "Price",
         cell: (info) => "$" + info.getValue(),
+      }),
+      columnHelper.accessor("creationAt", {
+        header: "Created At",
+        cell: (info) => dayjs(info.getValue()).format("MMM D, YYYY h:mm A"),
+      }),
+      columnHelper.accessor("updatedAt", {
+        header: "Updated At",
+        cell: (info) => dayjs(info.getValue()).format("MMM D, YYYY h:mm A"),
       }),
       columnHelper.accessor("actions", {
         header: "Actions",
