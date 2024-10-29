@@ -25,7 +25,7 @@ const HeaderComponent = (): ReactElement => {
         />
         <div className="flex gap-2">
           <SearchInputComponent />
-          <ButtonComponent>Cart</ButtonComponent>
+          <ButtonComponent href={"/cart"}>Cart</ButtonComponent>
           <ButtonComponent>Dark Mode</ButtonComponent>
         </div>
       </div>
