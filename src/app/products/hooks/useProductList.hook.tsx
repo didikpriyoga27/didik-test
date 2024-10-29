@@ -26,11 +26,11 @@ import useQueryProductsHook from "./useQueryProducts.hook";
  * The hook also uses the `useReactTable` hook to generate the table instance.
  */
 const useProductListHook = () => {
-  const { productsData } = useQueryProductsHook();
+  const queryProducts = useQueryProductsHook();
 
   const data: Product[] = useMemo(
     () =>
-      (productsData ?? []).map((product) => ({
+      (queryProducts.productsData ?? []).map((product) => ({
         id: product.id,
         title: product.title,
         description: product.description,
@@ -39,7 +39,7 @@ const useProductListHook = () => {
         creationAt: product.creationAt,
         updatedAt: product.updatedAt,
       })),
-    [productsData]
+    [queryProducts]
   );
 
   const columnHelper = createColumnHelper<Column>();
@@ -91,6 +91,12 @@ const useProductListHook = () => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    initialState: {
+      pagination: {
+        pageIndex: 1,
+        pageSize: queryProducts.limit,
+      },
+    },
   });
 
   return { data, columns, table };
