@@ -5,3 +5,7 @@ export interface Product {
   description: string;
   images: string[];
 }
+
+export interface Column extends Product {
+  actions?: string;
+}

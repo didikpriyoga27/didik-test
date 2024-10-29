@@ -11,7 +11,7 @@ import { PropsWithChildren, ReactElement } from "react";
  */
 const ButtonComponent = ({ children }: PropsWithChildren): ReactElement => {
   return (
-    <button className="bg-gray-200 dark:bg-gray-800 rounded-full py-2 px-4 line-clamp-1">
+    <button className="bg-gray-200 dark:bg-gray-800 rounded-full py-2 px-4 line-clamp-1 text-foreground">
       {children}
     </button>
   );
