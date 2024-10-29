@@ -13,6 +13,7 @@ const InputComponent = (): ReactElement => {
     <input
       type="text"
       className="bg-gray-200 dark:bg-gray-800 rounded-full p-2 px-4"
+      placeholder="Search..."
     />
   );
 };

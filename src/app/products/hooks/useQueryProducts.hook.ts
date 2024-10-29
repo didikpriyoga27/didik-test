@@ -35,33 +35,27 @@ const useQueryProductsHook = () => {
     [searchParams]
   );
 
-  /**
-   * Updates the current page and stores it in the browser's URL
-   * using the query parameter `page`.
-   *
-   * @param {number} newPage The new page number.
-   */
-  const setPage = (newPage: number) => {
-    router.push(pathname + "?" + createQueryString("page", newPage.toString()));
-  };
+  const setPage = useCallback(
+    (newPage: number) => {
+      router.push(
+        pathname + "?" + createQueryString("page", newPage.toString())
+      );
+    },
+    [createQueryString, pathname, router]
+  );
 
   const incrementPage = () => setPage(page + 1);
   const decrementPage = () => setPage(page - 1);
 
-  /**
-   * Fetches the products from the API given the current page and limit.
-   *
-   * @returns The list of products.
-   */
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     const response = await axios.get(
       `${baseUrl}/products?offset=${offset}&limit=${limit}`
     );
     return response.data;
-  };
+  }, [limit, offset]);
 
   const { data: productsData } = useQuery<Product[]>({
-    queryKey: ["products"],
+    queryKey: ["products", page, limit],
     queryFn: fetchProducts,
   });
 

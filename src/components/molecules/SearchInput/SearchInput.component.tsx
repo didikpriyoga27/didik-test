@@ -1,5 +1,6 @@
-import ButtonComponent from "../../atoms/Button";
-import InputComponent from "../../atoms/Input";
+import ButtonComponent from "@/components/atoms/Button";
+import { SearchIcon } from "@/components/atoms/Icons";
+import InputComponent from "@/components/atoms/Input";
 
 /**
  * A component that renders a search input and a search button.
@@ -10,7 +11,9 @@ const SearchInputComponent = () => {
   return (
     <div className="flex items-center gap-2">
       <InputComponent />
-      <ButtonComponent>Search</ButtonComponent>
+      <ButtonComponent>
+        <SearchIcon className="dark:invert" />
+      </ButtonComponent>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import { CartIcon } from "@/components/atoms/Icons";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactElement } from "react";
@@ -28,8 +29,10 @@ const HeaderComponent = (): ReactElement => {
         </Link>
         <div className="flex gap-2">
           <SearchInputComponent />
-          <ButtonComponent href={"/cart"}>Cart</ButtonComponent>
-          <ButtonComponent>Dark Mode</ButtonComponent>
+          <ButtonComponent href={"/cart"}>
+            <CartIcon className="dark:invert" />
+          </ButtonComponent>
+          {/* <DarkModeToggleComponent /> */}
         </div>
       </div>
     </header>

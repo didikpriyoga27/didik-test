@@ -10,6 +10,7 @@ import dayjs from "dayjs";
 import { useMemo } from "react";
 import { Column, Product } from "../type";
 
+import { DeleteIcon, EditIcon } from "@/components/atoms/Icons";
 import useQueryProductsHook from "./useQueryProducts.hook";
 
 /**
@@ -74,14 +75,16 @@ const useProductListHook = () => {
         header: "Updated At",
         cell: (info) => dayjs(info.getValue()).format("MMM D, YYYY h:mm a"),
       }),
-      columnHelper.accessor("actions", {
+      columnHelper.display({
         header: "Actions",
         cell: (info) => (
           <div className="flex gap-2 justify-center">
             <ButtonComponent href={`/products/${info.row.original.id}`}>
-              Edit
+              <EditIcon className="dark:invert" />
             </ButtonComponent>
-            <ButtonComponent>Delete</ButtonComponent>
+            <ButtonComponent>
+              <DeleteIcon className="dark:invert" />
+            </ButtonComponent>
           </div>
         ),
       }),

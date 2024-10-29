@@ -13,25 +13,13 @@ function ProductPaginationComponent({
   table,
 }: IProductPaginationComponentProps) {
   return (
-    <section className="flex items-center justify-end gap-2">
-      <button
-        className="border rounded p-1"
-        onClick={() => table.previousPage()}
-        disabled={!table.getCanPreviousPage()}
-      >
-        {"<"}
-      </button>
+    <section className="flex items-center justify-end gap-2 mb-8">
+      <button className="border rounded p-1">{"<"}</button>
       <span className="flex items-center gap-1">
         <div>Page</div>
         <strong>{table.getState().pagination.pageIndex}</strong>
       </span>
-      <button
-        className="border rounded p-1"
-        onClick={() => table.nextPage()}
-        disabled={!table.getCanNextPage()}
-      >
-        {">"}
-      </button>
+      <button className="border rounded p-1">{">"}</button>
     </section>
   );
 }
