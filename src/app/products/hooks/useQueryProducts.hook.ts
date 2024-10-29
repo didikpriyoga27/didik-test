@@ -4,6 +4,17 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { Product } from "../type";
 
+/**
+ * A custom hook for querying the products from the API.
+ *
+ * The hook returns an object with the following properties:
+ * - productsData: The list of products.
+ * - page: The current page number.
+ * - limit: The current limit of products per page.
+ * - setPage: A function to update the current page and store it in the browser's URL.
+ * - incrementPage: A function to increment the current page.
+ * - decrementPage: A function to decrement the current page.
+ */
 const useQueryProductsHook = () => {
   const router = useRouter();
   const pathname = usePathname();
