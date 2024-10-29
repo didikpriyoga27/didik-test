@@ -4,7 +4,7 @@ import CartListComponent from "./components/CartList";
 
 const Cart = () => {
   return (
-    <div className="grid grid-rows-[auto_1fr_auto]">
+    <div>
       <HeaderComponent />
       <CartListComponent />
       <CartFooterComponent />

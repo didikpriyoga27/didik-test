@@ -13,7 +13,7 @@ import ProductListComponent from "./components/ProductList";
  */
 const Products = (): ReactElement => {
   return (
-    <div className="grid grid-rows-[auto_1fr_auto]">
+    <div>
       <HeaderComponent />
       <ProductHeaderComponent />
       <ProductListComponent />
