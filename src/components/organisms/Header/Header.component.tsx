@@ -1,14 +1,13 @@
 import Image from "next/image";
 import { ReactElement } from "react";
 import ButtonComponent from "../../atoms/Button";
-import TitleComponent from "../../atoms/Title";
 import SearchInputComponent from "../../molecules/SearchInput";
 
 /**
  * A component that renders a header for the application.
  *
- * It includes the Next.js logo, the title of the application, and a search input,
- * a cart button, and a button to toggle dark mode.
+ * The header includes the Next.js logo, a search input, a cart button,
+ * and a button to toggle dark mode. It is styled using Tailwind CSS for layout.
  *
  * @returns {ReactElement} A JSX element representing the header component.
  */
@@ -24,7 +23,6 @@ const HeaderComponent = (): ReactElement => {
           priority
           className="dark:invert"
         />
-        <TitleComponent>{"Products"}</TitleComponent>
         <div className="flex gap-2">
           <SearchInputComponent />
           <ButtonComponent>Cart</ButtonComponent>

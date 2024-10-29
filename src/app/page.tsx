@@ -1,19 +1,12 @@
+import { redirect } from "next/navigation";
 import { ReactElement } from "react";
-import HeaderComponent from "../components/organisms/Header";
-import ProductListComponent from "./products/components/ProductList";
 
 /**
- * The root component of the app.
+ * Redirects the user to the product list page.
  *
- * It renders the main layout of the app, which consists of a header and a list of products.
- *
- * @returns {ReactElement} A JSX element representing the root component.
+ * This is the entry point of the application and redirects the user to
+ * the product list page.
  */
 export default function Home(): ReactElement {
-  return (
-    <div className="grid grid-rows-[auto_1fr_auto]">
-      <HeaderComponent />
-      <ProductListComponent />
-    </div>
-  );
+  redirect("/products");
 }
