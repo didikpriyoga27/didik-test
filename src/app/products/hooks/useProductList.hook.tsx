@@ -76,9 +76,11 @@ const useProductListHook = () => {
       }),
       columnHelper.accessor("actions", {
         header: "Actions",
-        cell: () => (
+        cell: (info) => (
           <div className="flex gap-2 justify-center">
-            <ButtonComponent>Edit</ButtonComponent>
+            <ButtonComponent href={`/products/${info.row.original.id}`}>
+              Edit
+            </ButtonComponent>
             <ButtonComponent>Delete</ButtonComponent>
           </div>
         ),
