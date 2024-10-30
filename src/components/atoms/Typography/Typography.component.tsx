@@ -20,6 +20,10 @@ const TypographyComponent = ({
   const defaultClassName = "text-foreground dark:text-background";
   const combinedClassName = `${defaultClassName} ${className || ""}`.trim();
 
+  if (as === "p") {
+    console.log(combinedClassName);
+  }
+
   switch (as) {
     case "h1":
       return <h1 className={combinedClassName}>{children}</h1>;
@@ -27,6 +31,8 @@ const TypographyComponent = ({
       return <h2 className={combinedClassName}>{children}</h2>;
     case "span":
       return <span className={combinedClassName}>{children}</span>;
+    case "label":
+      return <label className={combinedClassName}>{children}</label>;
     default:
       return <p className={combinedClassName}>{children}</p>;
   }

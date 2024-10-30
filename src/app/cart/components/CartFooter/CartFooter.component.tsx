@@ -6,7 +6,7 @@ const CartFooterComponent = () => {
   const { data } = useCartListHook();
   const total = data.reduce((acc, item) => acc + item.price * item.qty, 0);
   return (
-    <footer className="w-1/2 mx-auto mt-12 flex justify-between">
+    <footer className="w-1/2 mx-auto mt-12 flex items-center justify-between">
       <TypographyComponent className="font-bold">
         Total: ${total}
       </TypographyComponent>

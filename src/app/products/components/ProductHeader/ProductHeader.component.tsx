@@ -1,13 +1,23 @@
+"use client";
+
 import ButtonComponent from "@/components/atoms/Button";
 import TitleComponent from "@/components/atoms/Title";
 
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
+import ProductModal from "../../modals/Product";
 
 const ProductHeaderComponent = (): ReactElement => {
+  const [isShowProductModal, setIsShowProductModal] = useState(false);
+
   return (
     <section className="flex justify-between items-center w-11/12 mx-auto">
       <TitleComponent>Products</TitleComponent>
-      <ButtonComponent href="/products/add">Add Product</ButtonComponent>
+      <ButtonComponent onClick={() => setIsShowProductModal(true)}>
+        Add Product
+      </ButtonComponent>
+      {isShowProductModal && (
+        <ProductModal setIsShowProductModal={setIsShowProductModal} />
+      )}
     </section>
   );
 };

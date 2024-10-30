@@ -1,3 +1,5 @@
+import ButtonComponent from "@/components/atoms/Button";
+import TypographyComponent from "@/components/atoms/Typography";
 import { IProductPaginationComponentProps } from "./type";
 
 /**
@@ -14,12 +16,11 @@ function ProductPaginationComponent({
 }: IProductPaginationComponentProps) {
   return (
     <section className="flex items-center justify-end gap-2">
-      <button className="border rounded p-1">{"<"}</button>
-      <span className="flex items-center gap-1">
-        <div>Page</div>
+      <ButtonComponent>{"<"}</ButtonComponent>
+      <TypographyComponent as="span" className="flex items-center gap-1">
         <strong>{table.getState().pagination.pageIndex}</strong>
-      </span>
-      <button className="border rounded p-1">{">"}</button>
+      </TypographyComponent>
+      <ButtonComponent>{">"}</ButtonComponent>
     </section>
   );
 }

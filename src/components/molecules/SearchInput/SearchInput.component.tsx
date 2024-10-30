@@ -25,6 +25,7 @@ const SearchInputComponent = () => {
       <InputComponent
         onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
         onChange={(e) => (keywordRef.current = e.target.value)}
+        placeholder="Search..."
       />
       <ButtonComponent onClick={handleSubmit}>
         <SearchIcon className="dark:invert" />
