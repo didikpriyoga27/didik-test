@@ -22,8 +22,8 @@ const CartItemComponent = ({ item }: ICartitemComponentProps): JSX.Element => {
   const { removeItem, decreaseQuantity, increaseQuantity } = useCartStore();
 
   return (
-    <div className="flex flex-row items-center justify-between mb-4">
-      <div className="flex flex-1 flex-row items-center gap-4">
+    <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between mb-4 sm:mb-0 gap-4">
+      <div className="flex flex-1 w-full flex-row items-center gap-4">
         <CartImageComponent src={item.product.images[0]} />
         <div>
           <TypographyComponent as="h2" className="text-lg font-bold">
@@ -34,12 +34,13 @@ const CartItemComponent = ({ item }: ICartitemComponentProps): JSX.Element => {
           </TypographyComponent>
         </div>
       </div>
-      <div className="flex flex-1 items-center justify-end">
+      <div className="flex flex-1 w-full items-center justify-between sm:justify-end">
         <ButtonComponent
+          variant="danger"
           className="mr-4"
           onClick={() => removeItem(item.product.id)}
         >
-          <DeleteIcon className="dark:invert" />
+          <DeleteIcon className="invert" />
         </ButtonComponent>
         <ButtonComponent
           onClick={() => decreaseQuantity(item.product.id)}
@@ -54,7 +55,10 @@ const CartItemComponent = ({ item }: ICartitemComponentProps): JSX.Element => {
         <ButtonComponent onClick={() => increaseQuantity(item.product.id)}>
           +
         </ButtonComponent>
-        <TypographyComponent as="span" className="pl-16 min-w-32 text-right">
+        <TypographyComponent
+          as="span"
+          className="pl-4 sm:pl-16 min-w-24 sm:min-w-32 text-right"
+        >
           ${item.qty * item.product.price}
         </TypographyComponent>
       </div>

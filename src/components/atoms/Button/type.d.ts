@@ -1,13 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 
-export type Variant =
-  | "primary"
-  | "warning"
-  | "danger"
-  | "inverse"
-  | "success"
-  | "purple"
-  | "default";
+export type Variant = "info" | "warning" | "danger" | "success" | "default";
 
 export interface IButtonComponentProps {
   href?: string;

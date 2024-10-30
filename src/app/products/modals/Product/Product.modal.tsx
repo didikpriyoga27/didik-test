@@ -187,7 +187,9 @@ const ProductModal = ({
           defaultValue={selectedProduct?.category.id}
         />
         <div className="flex justify-end w-full mt-4">
-          <ButtonComponent type="submit">Submit</ButtonComponent>
+          <ButtonComponent variant="success" type="submit">
+            Submit
+          </ButtonComponent>
         </div>
       </form>
     </ModalComponent>

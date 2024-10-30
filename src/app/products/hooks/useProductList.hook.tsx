@@ -100,8 +100,8 @@ const useProductListHook = () => {
         size: 400,
         cell: (info) => (
           <p title={info.getValue()}>
-            {info.getValue().length > 240
-              ? info.getValue().slice(0, 240) + "..."
+            {info.getValue().length > 160
+              ? info.getValue().slice(0, 160) + "..."
               : info.getValue()}
           </p>
         ),
@@ -132,17 +132,22 @@ const useProductListHook = () => {
         cell: (info) => (
           <div className="flex gap-2 justify-center flex-wrap">
             <ButtonComponent
+              variant="info"
               onClick={() => handleEditOnClick(info.row.original)}
             >
-              <EditIcon className="dark:invert" />
-            </ButtonComponent>
-            <ButtonComponent onClick={() => handleAddItem(info)}>
-              <CartIcon className="dark:invert" />
+              <EditIcon className="invert" />
             </ButtonComponent>
             <ButtonComponent
+              variant="success"
+              onClick={() => handleAddItem(info)}
+            >
+              <CartIcon className="invert" />
+            </ButtonComponent>
+            <ButtonComponent
+              variant="danger"
               onClick={() => handleDeleteOnClick(info.row.original)}
             >
-              <DeleteIcon className="dark:invert" />
+              <DeleteIcon className="invert" />
             </ButtonComponent>
           </div>
         ),

@@ -24,7 +24,7 @@ function ProductPaginationComponent() {
       <ButtonComponent
         href={`/products?page=${Number(getQueryString("page")) - 1}`}
       >
-        &lt;
+        {"<"}
       </ButtonComponent>
       {Number(getQueryString("page")) > 1 && (
         <ButtonComponent href="/products?page=1">1</ButtonComponent>
@@ -32,10 +32,13 @@ function ProductPaginationComponent() {
       {Number(getQueryString("page")) > 2 && (
         <ButtonComponent href="/products?page=2">2</ButtonComponent>
       )}
-      <TypographyComponent>
-        {Number(getQueryString("page")) > 3 && "..."}
-      </TypographyComponent>
-      <TypographyComponent as="span" className="flex items-center gap-1">
+      {Number(getQueryString("page")) > 3 && (
+        <TypographyComponent>{"..."}</TypographyComponent>
+      )}
+      <TypographyComponent
+        as="span"
+        className="flex items-center gap-1 bg-blue-600 text-white p-2 px-4 rounded-md"
+      >
         <strong>{(Number(getQueryString("page")) || 1) ?? 1}</strong>
       </TypographyComponent>
       <ButtonComponent

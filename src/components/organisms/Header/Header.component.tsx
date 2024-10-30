@@ -35,18 +35,20 @@ const HeaderComponent = ({
   return (
     <header className="flex py-4 w-full justify-center">
       <div className="flex items-center justify-between w-11/12">
-        {renderedComponent.includes("logo") && (
-          <Link href="/products">
-            <Image
-              src="/next.svg"
-              alt="Next.js logo"
-              width={180}
-              height={38}
-              priority
-              className="dark:invert cursor-pointer"
-            />
-          </Link>
-        )}
+        <div className="hidden sm:block">
+          {renderedComponent.includes("logo") && (
+            <Link href="/products">
+              <Image
+                src="/next.svg"
+                alt="Next.js logo"
+                width={180}
+                height={38}
+                priority
+                className="dark:invert cursor-pointer"
+              />
+            </Link>
+          )}
+        </div>
         <div className="flex gap-2">
           {renderedComponent.includes("search") && (
             <Suspense>

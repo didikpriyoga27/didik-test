@@ -18,7 +18,7 @@ import CartItemComponent from "../CartItem";
 const CartListComponent = (): JSX.Element => {
   const { data } = useCartListHook();
   return (
-    <section className="w-1/2 mx-auto space-y-4">
+    <section className="w-11/12 mx-auto space-y-4">
       <TitleComponent>Cart</TitleComponent>
       {data.length === 0 ? (
         <div className="items-center flex flex-col space-y-4">

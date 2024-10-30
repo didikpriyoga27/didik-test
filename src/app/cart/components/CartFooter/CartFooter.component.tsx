@@ -38,11 +38,13 @@ const CartFooterComponent = () => {
   }
 
   return (
-    <footer className="w-1/2 mx-auto mt-12 flex items-center justify-between">
+    <footer className="w-11/12 mx-auto mt-12 flex items-center justify-between">
       <TypographyComponent className="font-bold">
         Total: ${total}
       </TypographyComponent>
-      <ButtonComponent onClick={handleSubmit}>Checkout</ButtonComponent>
+      <ButtonComponent variant="success" onClick={handleSubmit}>
+        Checkout
+      </ButtonComponent>
     </footer>
   );
 };

@@ -67,7 +67,9 @@ const DeleteProductModal = ({
         <ButtonComponent onClick={() => setIsShowDeleteModal(false)}>
           Cancel
         </ButtonComponent>
-        <ButtonComponent onClick={handleDeleteOnClick}>Delete</ButtonComponent>
+        <ButtonComponent variant="danger" onClick={handleDeleteOnClick}>
+          Delete
+        </ButtonComponent>
       </div>
     </ModalComponent>
   );

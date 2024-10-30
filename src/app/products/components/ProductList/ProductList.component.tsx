@@ -38,7 +38,7 @@ const ProductListComponent = (): JSX.Element => {
   });
 
   return (
-    <section className="w-11/12 mx-auto">
+    <section className="w-11/12 mx-auto overflow-x-auto">
       <table className="w-full bg-slate-800 dark:bg-slate-600 text-background my-4 rounded-md">
         <TableHeaderComponent table={table} />
         <TableBodyComponent
