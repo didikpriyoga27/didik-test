@@ -23,7 +23,7 @@ const CategoryListComponent = ({
       Category:
       <SelectComponent
         {...register("categoryId")}
-        className="block w-full mt-1 p-2 border rounded"
+        className="block w-full my-2 p-2 border rounded dark:bg-foreground bg-background"
         options={categoryOptions}
         defaultValue={defaultValue}
       />

@@ -11,9 +11,9 @@ const productSchema = z.object({
     (categoryText) => parseInt(z.string().parse(categoryText), 10),
     z.number().min(1, { message: "Category is required" })
   ),
-  // images: z
-  //   .array(z.string().url({ message: "Image URL is not valid" }))
-  //   .min(1, { message: "At least one image is required" }),
+  uploadedImages: z
+    .array(z.string(), { message: "At least one image is required" })
+    .min(1, { message: "At least one image is required" }),
 });
 
 export default productSchema;

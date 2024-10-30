@@ -9,6 +9,7 @@ import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import CategoryListComponent from "../../components/CategoryList";
+import ProductImageUploaderComponent from "../../components/ProductImageUploader";
 import useMutationProductHook from "../../hooks/useMutationProduct.hook";
 import useQueryProductsHook from "../../hooks/useQueryProducts.hook";
 import { productSchema } from "../../schemas";
@@ -35,6 +36,8 @@ const ProductModal = ({
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
+    watch,
   } = useForm<
     z.input<typeof productSchema>,
     unknown,
@@ -47,6 +50,7 @@ const ProductModal = ({
           price: String(selectedProduct.price),
           description: selectedProduct.description,
           categoryId: String(selectedProduct.category.id),
+          uploadedImages: selectedProduct.images,
         }
       : undefined,
   });
@@ -104,15 +108,19 @@ const ProductModal = ({
     (data: z.output<typeof productSchema>) => {
       const dataSubmit: CreateProductParams = {
         ...data,
-        images: ["https://placeimg.com/640/480/any"],
+        images: watch("uploadedImages"),
       };
+
+      console.log(dataSubmit);
       if (selectedProduct) {
         return handleUpdateProduct(dataSubmit);
       }
       return handleCreateProduct(dataSubmit);
     },
-    [handleCreateProduct, handleUpdateProduct, selectedProduct]
+    [handleCreateProduct, handleUpdateProduct, selectedProduct, watch]
   );
+
+  console.log(errors);
 
   return (
     <ModalComponent>
@@ -130,13 +138,16 @@ const ProductModal = ({
           &times;
         </ButtonComponent>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="overflow-y-auto max-h-[calc(100vh-200px)] pr-4"
+      >
         <TypographyComponent as="label">
           Title:
           <InputComponent
             type="text"
             {...register("title")}
-            className="block w-full my-2 p-2 border rounded"
+            className="block w-full bg-transparent my-2 p-2 border rounded"
             placeholder="Input Title"
           />
           {errors.title && (
@@ -153,7 +164,7 @@ const ProductModal = ({
           <InputComponent
             type="number"
             {...register("price")}
-            className="block w-full my-2 p-2 border rounded"
+            className="block w-full bg-transparent my-2 p-2 border rounded"
             placeholder="Input Price"
           />
           {errors.price && (
@@ -169,7 +180,7 @@ const ProductModal = ({
           Description:
           <TextAreaComponent
             {...register("description")}
-            className="block w-full mt-1 p-2 border rounded"
+            className="block w-full bg-transparent my-2 p-2 border rounded"
             placeholder="Input Description"
           />
           {errors.description && (
@@ -186,8 +197,14 @@ const ProductModal = ({
           errors={errors}
           defaultValue={selectedProduct?.category.id}
         />
+        <ProductImageUploaderComponent
+          register={register}
+          errors={errors}
+          setValue={setValue}
+          defaultValue={selectedProduct?.images[0]}
+        />
         <div className="flex justify-end w-full mt-4">
-          <ButtonComponent variant="success" type="submit">
+          <ButtonComponent variant="success" onClick={handleSubmit(onSubmit)}>
             Submit
           </ButtonComponent>
         </div>

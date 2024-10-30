@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
+import useParseImageStringHook from "@/hooks/useParseImageString.hook";
+import { useMemo } from "react";
 import { IProductImageComponentProps } from "./type";
 
 /**
@@ -20,9 +22,15 @@ import { IProductImageComponentProps } from "./type";
 const ProductImageComponent = ({
   info,
 }: IProductImageComponentProps): JSX.Element => {
+  const { parseImageString } = useParseImageStringHook();
+
+  const src = useMemo(() => {
+    return parseImageString(info.getValue()[0]);
+  }, [info, parseImageString]);
+
   return (
     <img
-      src={info.getValue()[0]}
+      src={src}
       alt="product image"
       className="w-24 h-24 object-cover rounded-md"
       onError={({ currentTarget }) => {
