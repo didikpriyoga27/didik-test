@@ -1,6 +1,6 @@
 import ButtonComponent from "@/components/atoms/Button";
+import ModalComponent from "@/components/atoms/Modal";
 import TypographyComponent from "@/components/atoms/Typography";
-import ModalComponent from "@/components/organisms/Modal";
 import useToastHook from "@/hooks/useToast.hook";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";

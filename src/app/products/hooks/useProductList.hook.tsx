@@ -100,8 +100,8 @@ const useProductListHook = () => {
         size: 400,
         cell: (info) => (
           <p title={info.getValue()}>
-            {info.getValue().length > 160
-              ? info.getValue().slice(0, 160) + "..."
+            {info.getValue().length > 120
+              ? info.getValue().slice(0, 120) + "..."
               : info.getValue()}
           </p>
         ),
@@ -128,26 +128,29 @@ const useProductListHook = () => {
       }),
       columnHelper.display({
         header: "Actions",
-        size: 100,
+        size: 120,
         cell: (info) => (
-          <div className="flex gap-2 justify-center flex-wrap">
+          <div className="flex gap-2 justify-start flex-wrap">
             <ButtonComponent
+              className="p-1"
               variant="info"
               onClick={() => handleEditOnClick(info.row.original)}
             >
-              <EditIcon className="invert" />
+              <EditIcon className="invert" width={16} height={16} />
             </ButtonComponent>
             <ButtonComponent
+              className="p-1"
               variant="success"
               onClick={() => handleAddItem(info)}
             >
-              <CartIcon className="invert" />
+              <CartIcon className="invert" width={16} height={16} />
             </ButtonComponent>
             <ButtonComponent
+              className="p-1"
               variant="danger"
               onClick={() => handleDeleteOnClick(info.row.original)}
             >
-              <DeleteIcon className="invert" />
+              <DeleteIcon className="invert" width={16} height={16} />
             </ButtonComponent>
           </div>
         ),

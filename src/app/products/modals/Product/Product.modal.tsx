@@ -1,8 +1,8 @@
 import ButtonComponent from "@/components/atoms/Button";
 import InputComponent from "@/components/atoms/Input";
+import ModalComponent from "@/components/atoms/Modal";
 import TextAreaComponent from "@/components/atoms/TextArea";
 import TypographyComponent from "@/components/atoms/Typography";
-import ModalComponent from "@/components/organisms/Modal";
 import useToastHook from "@/hooks/useToast.hook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback } from "react";
