@@ -12,7 +12,10 @@ const ProductHeaderComponent = (): ReactElement => {
   return (
     <section className="flex justify-between items-center w-11/12 mx-auto">
       <TitleComponent>Products</TitleComponent>
-      <ButtonComponent onClick={() => setIsShowProductModal(true)}>
+      <ButtonComponent
+        variant="warning"
+        onClick={() => setIsShowProductModal(true)}
+      >
         Add Product
       </ButtonComponent>
       {isShowProductModal && (

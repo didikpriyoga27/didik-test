@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ReactElement } from "react";
+import { ButtonVariants } from "./Button.variant";
 import { IButtonComponentProps } from "./type";
 
 /**
@@ -29,10 +30,11 @@ const ButtonComponent = ({
   className,
   type,
   disabled,
+  variant = "default",
 }: IButtonComponentProps): ReactElement => {
-  const defaultClassName =
-    "bg-gray-200 dark:bg-gray-800 rounded-full py-2 px-4 line-clamp-1 text-foreground dark:text-background";
-  const combinedClassName = `${defaultClassName} ${className || ""}`.trim();
+  const combinedClassName = `${className || ""} ${ButtonVariants({
+    variant,
+  })} `.trim();
 
   if (href) {
     return (
