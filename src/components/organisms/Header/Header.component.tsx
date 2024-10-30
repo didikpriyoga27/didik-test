@@ -2,7 +2,7 @@ import { CartIcon } from "@/components/atoms/Icons";
 import DarkModeToggleComponent from "@/components/molecules/DarkModeToggle/DarkModeToggle.component";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactElement } from "react";
+import { ReactElement, Suspense } from "react";
 import ButtonComponent from "../../atoms/Button";
 import SearchInputComponent from "../../molecules/SearchInput";
 import { IHeaderComponent, IHeaderComponentProps } from "./type";
@@ -49,7 +49,11 @@ const HeaderComponent = ({
           </Link>
         )}
         <div className="flex gap-2">
-          {renderedComponent.includes("search") && <SearchInputComponent />}
+          {renderedComponent.includes("search") && (
+            <Suspense>
+              <SearchInputComponent />
+            </Suspense>
+          )}
           {renderedComponent.includes("cart") && (
             <ButtonComponent href={"/cart"}>
               <CartIcon className="dark:invert" />
