@@ -18,3 +18,11 @@ export interface Product {
 export interface Column extends Product {
   actions?: string;
 }
+
+export interface CreateProductParams {
+  title: string;
+  price: number;
+  description: string;
+  categoryId: number;
+  images: string[];
+}

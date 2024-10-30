@@ -6,13 +6,17 @@ import { useCallback } from "react";
 import { Product } from "../type";
 
 /**
- * A custom hook for querying the products from the API.
+ * A custom hook for querying products from the API.
  *
- * The hook returns an object with the following properties:
- * - productsData: The list of products.
+ * This hook manages pagination, search functionality, and data fetching
+ * for products using React Query. It provides the current page, limit,
+ * and a set of functions to navigate between pages.
+ *
+ * @returns {Object} An object containing:
+ * - productsData: The list of fetched products.
  * - page: The current page number.
- * - limit: The current limit of products per page.
- * - setPage: A function to update the current page and store it in the browser's URL.
+ * - limit: The number of products per page.
+ * - setPage: A function to set the current page.
  * - incrementPage: A function to increment the current page.
  * - decrementPage: A function to decrement the current page.
  */
@@ -21,7 +25,7 @@ const useQueryProductsHook = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const baseUrl = "https://api.escuelajs.co/api/v1";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const search = searchParams.get("search");
   const page = Number(searchParams.get("page") ?? 1);
   const limit = Number(searchParams.get("limit") ?? 5);
@@ -48,15 +52,23 @@ const useQueryProductsHook = () => {
       }`
     );
     return response.data;
-  }, [limit, offset, search]);
+  }, [baseUrl, limit, offset, search]);
 
-  const { data: productsData } = useQuery<Product[]>({
+  const { data: productsData, refetch } = useQuery<Product[]>({
     queryKey: ["products", page, limit, search],
     queryFn: fetchProducts,
     placeholderData: keepPreviousData,
   });
 
-  return { productsData, page, limit, setPage, incrementPage, decrementPage };
+  return {
+    productsData,
+    refetch,
+    page,
+    limit,
+    setPage,
+    incrementPage,
+    decrementPage,
+  };
 };
 
 export default useQueryProductsHook;
