@@ -20,7 +20,7 @@ import { IDeleteProductModalProps } from "./type";
  * @returns {JSX.Element} A JSX element representing the delete product modal.
  */
 const DeleteProductModal = ({
-  selectedId,
+  selectedProduct,
   setIsShowDeleteModal,
 }: IDeleteProductModalProps): JSX.Element => {
   const { mutateDeleteProduct } = useMutationProductHook();
@@ -29,7 +29,7 @@ const DeleteProductModal = ({
   const queryClient = useQueryClient();
 
   const handleDeleteOnClick = useCallback(() => {
-    mutateDeleteProduct(selectedId)
+    mutateDeleteProduct(selectedProduct.id)
       .then(() => {
         queryClient.invalidateQueries({ queryKey: ["products"] });
         setIsShowDeleteModal(false);
@@ -42,7 +42,7 @@ const DeleteProductModal = ({
     errorMessage,
     mutateDeleteProduct,
     queryClient,
-    selectedId,
+    selectedProduct,
     setIsShowDeleteModal,
     successMessage,
   ]);
@@ -61,7 +61,7 @@ const DeleteProductModal = ({
         </ButtonComponent>
       </div>
       <TypographyComponent>
-        Are you sure you want to delete this {selectedId}?
+        Are you sure you want to delete this {selectedProduct.title}?
       </TypographyComponent>
       <div className="flex justify-between items-center mt-4">
         <ButtonComponent onClick={() => setIsShowDeleteModal(false)}>

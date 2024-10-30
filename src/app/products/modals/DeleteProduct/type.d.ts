@@ -1,4 +1,6 @@
+import { Product } from "../../type";
+
 export interface IDeleteProductModalProps {
-  selectedId: number;
+  selectedProduct: Product;
   setIsShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
 }

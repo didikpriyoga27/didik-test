@@ -8,28 +8,25 @@ import { CellContext, createColumnHelper } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import { useCallback, useMemo, useRef, useState } from "react";
 import ProductImageComponent from "../components/ProductImage";
-import { Column } from "../type";
+import { Column, Product } from "../type";
 import useQueryProductsHook from "./useQueryProducts.hook";
 
 const columnHelper = createColumnHelper<Column>();
 
 /**
- * A custom hook for generating a table with a list of products.
+ * A hook for getting the list of products.
  *
- * The hook provides the following properties:
+ * The hook returns an object with the following properties:
  * - data: The list of products.
  * - columns: The columns of the table.
- * - isShowDeleteModal: A boolean indicating whether the delete product modal is shown.
- * - selectedId: The id of the product selected for deletion.
- * - setIsShowDeleteModal: A function to set whether the delete product modal is shown.
+ * - isShowDeleteModal: A boolean indicating whether the delete modal should be shown or not.
+ * - selectedProduct: The selected product to be deleted.
+ * - setIsShowDeleteModal: A function to set the value of isShowDeleteModal.
  *
- * The hook uses the useQueryProductsHook hook to fetch the list of products.
- * The hook also defines columns for the table, including product id, image, title, description, category, price, created at, updated at, and actions.
- *
- * @returns {Object} An object containing the properties above.
+ * The hook also provides functions to add a product to the cart, and to delete a product.
  */
 const useProductListHook = () => {
-  const selectedIdRef = useRef<number>(0);
+  const selectedProductRef = useRef<Product | null>(null);
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
 
   const { addItem } = useCartStore();
@@ -66,8 +63,8 @@ const useProductListHook = () => {
     return queryProducts.productsData ?? [];
   }, [queryProducts.productsData]);
 
-  const handleDeleteOnClick = useCallback((id: number) => {
-    selectedIdRef.current = id;
+  const handleDeleteOnClick = useCallback((product: Product) => {
+    selectedProductRef.current = product;
     setIsShowDeleteModal(true);
   }, []);
 
@@ -129,7 +126,7 @@ const useProductListHook = () => {
               <CartIcon className="dark:invert" />
             </ButtonComponent>
             <ButtonComponent
-              onClick={() => handleDeleteOnClick(info.row.original.id)}
+              onClick={() => handleDeleteOnClick(info.row.original)}
             >
               <DeleteIcon className="dark:invert" />
             </ButtonComponent>
@@ -144,7 +141,7 @@ const useProductListHook = () => {
     data,
     columns,
     isShowDeleteModal,
-    selectedId: selectedIdRef.current,
+    selectedProduct: selectedProductRef.current,
     setIsShowDeleteModal,
   };
 };
