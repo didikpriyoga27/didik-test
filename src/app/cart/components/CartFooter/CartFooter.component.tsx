@@ -1,4 +1,5 @@
 import ButtonComponent from "@/components/atoms/Button";
+import TypographyComponent from "@/components/atoms/Typography";
 import useCartListHook from "../../hooks/useCartList.hook";
 
 const CartFooterComponent = () => {
@@ -6,7 +7,9 @@ const CartFooterComponent = () => {
   const total = data.reduce((acc, item) => acc + item.price * item.qty, 0);
   return (
     <footer className="w-1/2 mx-auto mt-12 flex justify-between">
-      <div>Total: ${total}</div>
+      <TypographyComponent className="font-bold">
+        Total: ${total}
+      </TypographyComponent>
       <ButtonComponent>Checkout</ButtonComponent>
     </footer>
   );

@@ -26,18 +26,21 @@ const ButtonComponent = ({
   children,
   onClick,
   href,
+  className,
 }: IButtonComponentProps): ReactElement => {
   const defaultClassName =
     "bg-gray-200 dark:bg-gray-800 rounded-full py-2 px-4 line-clamp-1 text-foreground dark:text-background";
+  const combinedClassName = `${defaultClassName} ${className || ""}`.trim();
+
   if (href) {
     return (
-      <Link href={href} className={defaultClassName}>
+      <Link href={href} className={combinedClassName}>
         {children}
       </Link>
     );
   }
   return (
-    <button onClick={onClick} className={defaultClassName}>
+    <button onClick={onClick} className={combinedClassName}>
       {children}
     </button>
   );

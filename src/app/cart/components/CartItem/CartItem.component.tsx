@@ -1,4 +1,7 @@
 import ButtonComponent from "@/components/atoms/Button";
+import { DeleteIcon } from "@/components/atoms/Icons";
+import TypographyComponent from "@/components/atoms/Typography";
+import CartImageComponent from "../CartImage";
 import { ICartitemComponentProps } from "./type";
 
 /**
@@ -17,19 +20,30 @@ import { ICartitemComponentProps } from "./type";
  */
 const CartItemComponent = ({ item }: ICartitemComponentProps): JSX.Element => {
   return (
-    <div className="grid grid-cols-4 gap-4">
-      <div className="col-span-3">
-        <h2 className="text-lg font-bold">{item.title}</h2>
-        <p className="text-sm">
-          {item.qty} x ${item.price}
-        </p>
+    <div className="flex flex-row items-center justify-between mb-4">
+      <div className="flex flex-row items-center gap-4">
+        <CartImageComponent src={item.images[0]} />
+        <div>
+          <TypographyComponent as="h2" className="text-lg font-bold">
+            {item.title}
+          </TypographyComponent>
+          <TypographyComponent className="text-sm">
+            {item.qty} x ${item.price}
+          </TypographyComponent>
+        </div>
       </div>
       <div className="flex items-center justify-end">
-        <ButtonComponent>Delete</ButtonComponent>
-        <button className="px-4 rounded">-</button>
-        <span className="px-2">{item.qty}</span>
-        <button className="px-4 rounded">+</button>
-        <span className="pl-4">${item.qty * item.price}</span>
+        <ButtonComponent className="mr-4">
+          <DeleteIcon className="dark:invert" />
+        </ButtonComponent>
+        <ButtonComponent>-</ButtonComponent>
+        <TypographyComponent as="span" className="px-2">
+          {item.qty}
+        </TypographyComponent>
+        <ButtonComponent>+</ButtonComponent>
+        <TypographyComponent as="span" className="pl-16">
+          ${item.qty * item.price}
+        </TypographyComponent>
       </div>
     </div>
   );
