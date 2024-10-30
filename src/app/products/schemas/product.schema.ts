@@ -7,7 +7,10 @@ const productSchema = z.object({
     z.number().min(1, { message: "Price is required" })
   ),
   description: z.string().min(1, { message: "Description is required" }),
-  // categoryId: z.number().min(1, { message: "Category is required" }),
+  categoryId: z.preprocess(
+    (categoryText) => parseInt(z.string().parse(categoryText), 10),
+    z.number().min(1, { message: "Category is required" })
+  ),
   // images: z
   //   .array(z.string().url({ message: "Image URL is not valid" }))
   //   .min(1, { message: "At least one image is required" }),

@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import CategoryListComponent from "../../components/CategoryList";
 import useMutationProductHook from "../../hooks/useMutationProduct.hook";
 import useQueryProductsHook from "../../hooks/useQueryProducts.hook";
 import { productSchema } from "../../schemas";
@@ -45,6 +46,7 @@ const ProductModal = ({
           title: selectedProduct.title,
           price: selectedProduct.price,
           description: selectedProduct.description,
+          categoryId: selectedProduct.category.id,
         }
       : undefined,
   });
@@ -102,7 +104,6 @@ const ProductModal = ({
     (data: z.output<typeof productSchema>) => {
       const dataSubmit: CreateProductParams = {
         ...data,
-        categoryId: 1,
         images: ["https://placeimg.com/640/480/any"],
       };
       if (selectedProduct) {
@@ -180,6 +181,11 @@ const ProductModal = ({
             </TypographyComponent>
           )}
         </TypographyComponent>
+        <CategoryListComponent
+          register={register}
+          errors={errors}
+          defaultValue={selectedProduct?.category.id}
+        />
         <div className="flex justify-end w-full mt-4">
           <ButtonComponent type="submit">Submit</ButtonComponent>
         </div>

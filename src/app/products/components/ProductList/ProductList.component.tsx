@@ -2,6 +2,7 @@
 
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import useProductListHook from "../../hooks/useProductList.hook";
+import useQueryCategoriesHook from "../../hooks/useQueryCategories.hook";
 import DeleteProductModal from "../../modals/DeleteProduct";
 import ProductModal from "../../modals/Product";
 import ProductPaginationComponent from "../ProductPagination";
@@ -28,6 +29,7 @@ import TableHeaderComponent from "./components/TableHeader";
  */
 const ProductListComponent = (): JSX.Element => {
   const productList = useProductListHook();
+  useQueryCategoriesHook();
 
   const table = useReactTable({
     data: productList.data,
