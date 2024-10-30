@@ -78,12 +78,12 @@ const useProductListHook = () => {
     () => [
       columnHelper.accessor("id", {
         header: "Product ID",
-        size: 100,
+        size: 40,
         cell: (info) => "#" + info.getValue(),
       }),
       columnHelper.accessor("images", {
         header: "Image",
-        size: 200,
+        size: 100,
         cell: (info) => (
           <div className="flex items-center justify-center w-full">
             <ProductImageComponent info={info} />
@@ -97,8 +97,14 @@ const useProductListHook = () => {
       }),
       columnHelper.accessor("description", {
         header: "Description",
-        size: 300,
-        cell: (info) => info.getValue(),
+        size: 400,
+        cell: (info) => (
+          <p title={info.getValue()}>
+            {info.getValue().length > 240
+              ? info.getValue().slice(0, 240) + "..."
+              : info.getValue()}
+          </p>
+        ),
       }),
       columnHelper.accessor("category", {
         header: "Category",

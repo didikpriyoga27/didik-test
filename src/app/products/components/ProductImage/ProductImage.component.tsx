@@ -24,7 +24,7 @@ const ProductImageComponent = ({
     <img
       src={info.getValue()[0]}
       alt="product image"
-      className="w-40 h-40 object-cover rounded-md"
+      className="w-24 h-24 object-cover rounded-md"
       onError={({ currentTarget }) => {
         currentTarget.onerror = null;
         currentTarget.src = "/default.png";

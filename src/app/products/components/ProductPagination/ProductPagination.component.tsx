@@ -44,7 +44,9 @@ function ProductPaginationComponent() {
           2
         </ButtonComponent>
       )}
-      {Number(getQueryString("page")) > 3 && "..."}
+      <TypographyComponent>
+        {Number(getQueryString("page")) > 3 && "..."}
+      </TypographyComponent>
       <TypographyComponent as="span" className="flex items-center gap-1">
         <strong>{(Number(getQueryString("page")) || 1) ?? 1}</strong>
       </TypographyComponent>
