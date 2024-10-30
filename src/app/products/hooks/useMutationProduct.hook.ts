@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useCallback } from "react";
-import { CreateProductParams } from "../type";
+import { CreateProductParams, Product } from "../type";
 
 /**
  * A hook for creating and deleting products.
@@ -28,8 +28,14 @@ const useMutationProductHook = () => {
     [baseUrl]
   );
 
+  const updateProduct = useCallback(
+    async ({ data, id }: { data: CreateProductParams; id: Product["id"] }) =>
+      axios.put(`${baseUrl}/products/${id}`, data),
+    [baseUrl]
+  );
+
   const deleteProduct = useCallback(
-    async (id: number) => axios.delete(`${baseUrl}/products/${id}`),
+    async (id: Product["id"]) => axios.delete(`${baseUrl}/products/${id}`),
     [baseUrl]
   );
 
@@ -38,12 +44,17 @@ const useMutationProductHook = () => {
     mutationFn: createProduct,
   });
 
+  const { mutateAsync: mutateUpdateProduct } = useMutation({
+    mutationKey: ["updateProduct"],
+    mutationFn: updateProduct,
+  });
+
   const { mutateAsync: mutateDeleteProduct } = useMutation({
     mutationKey: ["deleteProduct"],
     mutationFn: deleteProduct,
   });
 
-  return { mutateCreateProduct, mutateDeleteProduct };
+  return { mutateCreateProduct, mutateUpdateProduct, mutateDeleteProduct };
 };
 
 export default useMutationProductHook;

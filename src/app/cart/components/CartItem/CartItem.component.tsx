@@ -1,9 +1,7 @@
-import { Product } from "@/app/products/type";
 import ButtonComponent from "@/components/atoms/Button";
 import { DeleteIcon } from "@/components/atoms/Icons";
 import TypographyComponent from "@/components/atoms/Typography";
 import { useCartStore } from "@/stores/cart";
-import { useCallback } from "react";
 import CartImageComponent from "../CartImage";
 import { ICartitemComponentProps } from "./type";
 
@@ -23,27 +21,6 @@ import { ICartitemComponentProps } from "./type";
 const CartItemComponent = ({ item }: ICartitemComponentProps): JSX.Element => {
   const { removeItem, decreaseQuantity, increaseQuantity } = useCartStore();
 
-  const handleRemoveItem = useCallback(
-    (id: Product["id"]) => {
-      removeItem(id);
-    },
-    [removeItem]
-  );
-
-  const handleDecreaseQty = useCallback(
-    (id: Product["id"]) => {
-      decreaseQuantity(id);
-    },
-    [decreaseQuantity]
-  );
-
-  const handleIncreaseQty = useCallback(
-    (id: Product["id"]) => {
-      increaseQuantity(id);
-    },
-    [increaseQuantity]
-  );
-
   return (
     <div className="flex flex-row items-center justify-between mb-4">
       <div className="flex flex-1 flex-row items-center gap-4">
@@ -60,12 +37,12 @@ const CartItemComponent = ({ item }: ICartitemComponentProps): JSX.Element => {
       <div className="flex flex-1 items-center justify-end">
         <ButtonComponent
           className="mr-4"
-          onClick={() => handleRemoveItem(item.product.id)}
+          onClick={() => removeItem(item.product.id)}
         >
           <DeleteIcon className="dark:invert" />
         </ButtonComponent>
         <ButtonComponent
-          onClick={() => handleDecreaseQty(item.product.id)}
+          onClick={() => decreaseQuantity(item.product.id)}
           disabled={item.qty === 1}
           className={"disabled:opacity-50"}
         >
@@ -74,7 +51,7 @@ const CartItemComponent = ({ item }: ICartitemComponentProps): JSX.Element => {
         <TypographyComponent as="span" className="px-2">
           {item.qty}
         </TypographyComponent>
-        <ButtonComponent onClick={() => handleIncreaseQty(item.product.id)}>
+        <ButtonComponent onClick={() => increaseQuantity(item.product.id)}>
           +
         </ButtonComponent>
         <TypographyComponent as="span" className="pl-16 min-w-32 text-right">

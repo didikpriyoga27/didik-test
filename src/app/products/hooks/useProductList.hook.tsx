@@ -28,6 +28,7 @@ const columnHelper = createColumnHelper<Column>();
 const useProductListHook = () => {
   const selectedProductRef = useRef<Product | null>(null);
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
+  const [isShowEditModal, setIsShowEditModal] = useState(false);
 
   const { addItem } = useCartStore();
   const { successMessage, errorMessage } = useToastHook();
@@ -62,6 +63,11 @@ const useProductListHook = () => {
   const data = useMemo(() => {
     return queryProducts.productsData ?? [];
   }, [queryProducts.productsData]);
+
+  const handleEditOnClick = useCallback((product: Product) => {
+    selectedProductRef.current = product;
+    setIsShowEditModal(true);
+  }, []);
 
   const handleDeleteOnClick = useCallback((product: Product) => {
     selectedProductRef.current = product;
@@ -119,7 +125,9 @@ const useProductListHook = () => {
         size: 100,
         cell: (info) => (
           <div className="flex gap-2 justify-center flex-wrap">
-            <ButtonComponent href={`/products/${info.row.original.id}`}>
+            <ButtonComponent
+              onClick={() => handleEditOnClick(info.row.original)}
+            >
               <EditIcon className="dark:invert" />
             </ButtonComponent>
             <ButtonComponent onClick={() => handleAddItem(info)}>
@@ -134,16 +142,18 @@ const useProductListHook = () => {
         ),
       }),
     ],
-    [handleAddItem, handleDeleteOnClick]
+    [handleAddItem, handleDeleteOnClick, handleEditOnClick]
   );
 
   return {
-    data,
     columns,
+    data,
     isShowDeleteModal,
+    isShowEditModal,
+    isShowLoading: queryProducts.isShowLoading,
     selectedProduct: selectedProductRef.current,
     setIsShowDeleteModal,
-    isShowLoading: queryProducts.isShowLoading,
+    setIsShowEditModal,
   };
 };
 

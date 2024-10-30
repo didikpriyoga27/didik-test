@@ -15,43 +15,69 @@ import { CreateProductParams } from "../../type";
 import { IProductModalProps } from "./type";
 
 /**
- * A modal component for adding a new product.
+ * A modal component for adding or editing a product.
  *
- * The component renders a modal with a form that takes the title, price, and description of the product.
- * The form is validated using Zod.
- * When the form is submitted, the component sends a POST request to the API to create a new product.
- * If the request is successful, the component closes the modal and refetches the list of products.
- * If the request fails, the component displays an error message.
+ * The component displays a form with input fields for title, price, and description.
+ * When the form is submitted, it triggers a mutation to create or update a product.
+ * It also shows a success or error message based on the outcome.
+ * It also updates the product list by invalidating the relevant query.
  *
- * @param {IProductModalProps} props
- * @returns {JSX.Element}
+ * @param {IProductModalProps} props - The props for the modal component.
+ * @returns {JSX.Element} A JSX element representing the add product modal.
  */
 const ProductModal = ({
+  selectedProduct,
   setIsShowProductModal,
 }: IProductModalProps): JSX.Element => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<
     z.input<typeof productSchema>,
     unknown,
     z.output<typeof productSchema>
   >({
     resolver: zodResolver(productSchema),
+    defaultValues: selectedProduct
+      ? {
+          title: selectedProduct.title,
+          price: selectedProduct.price,
+          description: selectedProduct.description,
+        }
+      : undefined,
   });
-  const { mutateCreateProduct } = useMutationProductHook();
+
+  const { mutateCreateProduct, mutateUpdateProduct } = useMutationProductHook();
   const { refetch } = useQueryProductsHook();
   const { successMessage, errorMessage } = useToastHook();
 
-  const onSubmit = useCallback(
-    (data: z.output<typeof productSchema>) => {
-      const dataSubmit: CreateProductParams = {
-        ...data,
-        categoryId: 1,
-        images: ["https://placeimg.com/640/480/any"],
-      };
+  const handleUpdateProduct = useCallback(
+    (dataSubmit: CreateProductParams) => {
+      mutateUpdateProduct({ data: dataSubmit, id: selectedProduct!.id })
+        .then(() => {
+          setIsShowProductModal(false);
+          refetch();
+          successMessage("Product updated successfully");
+        })
+        .catch(() => {
+          setIsShowProductModal(false);
+          errorMessage("Failed to update product");
+        });
+    },
+    [
+      errorMessage,
+      mutateUpdateProduct,
+      refetch,
+      selectedProduct,
+      setIsShowProductModal,
+      successMessage,
+    ]
+  );
 
+  const handleCreateProduct = useCallback(
+    (dataSubmit: CreateProductParams) => {
       mutateCreateProduct(dataSubmit)
         .then(() => {
           setIsShowProductModal(false);
@@ -72,14 +98,32 @@ const ProductModal = ({
     ]
   );
 
+  const onSubmit = useCallback(
+    (data: z.output<typeof productSchema>) => {
+      const dataSubmit: CreateProductParams = {
+        ...data,
+        categoryId: 1,
+        images: ["https://placeimg.com/640/480/any"],
+      };
+      if (selectedProduct) {
+        return handleUpdateProduct(dataSubmit);
+      }
+      return handleCreateProduct(dataSubmit);
+    },
+    [handleCreateProduct, handleUpdateProduct, selectedProduct]
+  );
+
   return (
     <ModalComponent>
       <div className="flex justify-between items-center mb-2">
         <TypographyComponent as="h2" className="text-lg font-bold">
-          Add Product
+          {selectedProduct ? "Edit Product" : "Add Product"}
         </TypographyComponent>
         <ButtonComponent
-          onClick={() => setIsShowProductModal(false)}
+          onClick={() => {
+            reset();
+            setIsShowProductModal(false);
+          }}
           className="text-xl font-bold text-black dark:text-white"
         >
           &times;

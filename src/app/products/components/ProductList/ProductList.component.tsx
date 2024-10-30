@@ -3,6 +3,7 @@
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import useProductListHook from "../../hooks/useProductList.hook";
 import DeleteProductModal from "../../modals/DeleteProduct";
+import ProductModal from "../../modals/Product";
 import ProductPaginationComponent from "../ProductPagination";
 import TableBodyComponent from "./components/TableBody";
 import TableHeaderComponent from "./components/TableHeader";
@@ -48,6 +49,12 @@ const ProductListComponent = (): JSX.Element => {
         <DeleteProductModal
           selectedProduct={productList.selectedProduct}
           setIsShowDeleteModal={productList.setIsShowDeleteModal}
+        />
+      )}
+      {productList.isShowEditModal && productList.selectedProduct && (
+        <ProductModal
+          selectedProduct={productList.selectedProduct}
+          setIsShowProductModal={productList.setIsShowEditModal}
         />
       )}
     </section>
