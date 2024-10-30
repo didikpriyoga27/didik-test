@@ -5,30 +5,28 @@ import CartImageComponent from "../CartImage";
 import { ICartitemComponentProps } from "./type";
 
 /**
- * A component that renders an item within a shopping cart.
+ * A component that renders an item in the shopping cart.
  *
- * The component displays the item's title, quantity, and price,
- * and provides controls to adjust the quantity or delete the item.
+ * The component displays the product image, title, quantity, price per item,
+ * and the total price for the quantity. It also provides buttons to increase or
+ * decrease the quantity, and a button to remove the item from the cart.
  *
- * @param {ICartitemComponentProps} props - The props object containing the cart item data.
- * @param {Object} props.item - The cart item data.
- * @param {string} props.item.title - The title of the cart item.
- * @param {number} props.item.qty - The quantity of the cart item.
- * @param {number} props.item.price - The price of the cart item.
+ * @param {ICartitemComponentProps} props - The props for the component.
+ * @param {ReturnType<typeof useCartListHook>["data"][number]} props.item - The cart item data, including product details and quantity.
  *
- * @returns {JSX.Element} A JSX element representing the cart item.
+ * @returns {JSX.Element} A JSX element representing the cart item component.
  */
 const CartItemComponent = ({ item }: ICartitemComponentProps): JSX.Element => {
   return (
     <div className="flex flex-row items-center justify-between mb-4">
       <div className="flex flex-row items-center gap-4">
-        <CartImageComponent src={item.images[0]} />
+        <CartImageComponent src={item.product.images[0]} />
         <div>
           <TypographyComponent as="h2" className="text-lg font-bold">
-            {item.title}
+            {item.product.title}
           </TypographyComponent>
           <TypographyComponent className="text-sm">
-            {item.qty} x ${item.price}
+            {item.qty} x ${item.product.price}
           </TypographyComponent>
         </div>
       </div>
@@ -42,7 +40,7 @@ const CartItemComponent = ({ item }: ICartitemComponentProps): JSX.Element => {
         </TypographyComponent>
         <ButtonComponent>+</ButtonComponent>
         <TypographyComponent as="span" className="pl-16">
-          ${item.qty * item.price}
+          ${item.qty * item.product.price}
         </TypographyComponent>
       </div>
     </div>
