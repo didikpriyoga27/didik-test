@@ -11,6 +11,21 @@ import useQueryProductsHook from "./useQueryProducts.hook";
 
 const columnHelper = createColumnHelper<Column>();
 
+/**
+ * A custom hook for generating a table with a list of products.
+ *
+ * The hook provides the following properties:
+ * - data: The list of products.
+ * - columns: The columns of the table.
+ * - isShowDeleteModal: A boolean indicating whether the delete product modal is shown.
+ * - selectedId: The id of the product selected for deletion.
+ * - setIsShowDeleteModal: A function to set whether the delete product modal is shown.
+ *
+ * The hook uses the useQueryProductsHook hook to fetch the list of products.
+ * The hook also defines columns for the table, including product id, image, title, description, category, price, created at, updated at, and actions.
+ *
+ * @returns {Object} An object containing the properties above.
+ */
 const useProductListHook = () => {
   const selectedIdRef = useRef<number>(0);
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);

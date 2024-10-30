@@ -17,7 +17,7 @@ import { PropsWithChildren } from "react";
 const ModalComponent = ({ children }: PropsWithChildren) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-background dark:bg-foreground p-6 rounded-md shadow-md min-w-[300px] md:min-w-[500px]">
+      <div className="bg-background dark:bg-foreground p-4 rounded-md shadow-md min-w-[300px] md:min-w-[500px]">
         {children}
       </div>
     </div>

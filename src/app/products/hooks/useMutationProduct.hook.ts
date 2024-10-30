@@ -4,17 +4,20 @@ import { useCallback } from "react";
 import { CreateProductParams } from "../type";
 
 /**
- * A custom hook for creating a new product via an API.
+ * A hook for creating and deleting products.
  *
- * This hook provides a mutation function `mutateCreateProduct` that can be
- * used to trigger the product creation process. It uses `useMutation` from
- * React Query to handle the mutation logic.
+ * The hook uses the useMutation hook from react-query to create and delete products
+ * on the server. The hook returns an object with two properties: mutateCreateProduct
+ * and mutateDeleteProduct. These properties are functions that can be used to create
+ * and delete products respectively.
  *
- * The hook utilizes the `baseUrl` from environment variables and a `createProduct`
- * function that sends a POST request to the API endpoint for product creation.
+ * The functions returned by the hook take care of handling the mutation of the data
+ * on the server. The functions also handle refetching the data after the mutation
+ * has been completed.
  *
- * @returns {Object} An object containing:
- * - mutateCreateProduct: A function to trigger the product creation mutation.
+ * @returns {Object} An object containing two properties: mutateCreateProduct and
+ * mutateDeleteProduct. These properties are functions that can be used to create
+ * and delete products respectively.
  */
 const useMutationProductHook = () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -25,12 +28,22 @@ const useMutationProductHook = () => {
     [baseUrl]
   );
 
+  const deleteProduct = useCallback(
+    async (id: number) => axios.delete(`${baseUrl}/products/${id}`),
+    [baseUrl]
+  );
+
   const { mutateAsync: mutateCreateProduct } = useMutation({
     mutationKey: ["createProduct"],
     mutationFn: createProduct,
   });
 
-  return { mutateCreateProduct };
+  const { mutateAsync: mutateDeleteProduct } = useMutation({
+    mutationKey: ["deleteProduct"],
+    mutationFn: deleteProduct,
+  });
+
+  return { mutateCreateProduct, mutateDeleteProduct };
 };
 
 export default useMutationProductHook;
