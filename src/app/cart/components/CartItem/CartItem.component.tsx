@@ -1,25 +1,52 @@
+import { Product } from "@/app/products/type";
 import ButtonComponent from "@/components/atoms/Button";
 import { DeleteIcon } from "@/components/atoms/Icons";
 import TypographyComponent from "@/components/atoms/Typography";
+import { useCartStore } from "@/stores/cart";
+import { useCallback } from "react";
 import CartImageComponent from "../CartImage";
 import { ICartitemComponentProps } from "./type";
 
 /**
- * A component that renders an item in the shopping cart.
+ * A component that renders a single item in the cart.
  *
- * The component displays the product image, title, quantity, price per item,
- * and the total price for the quantity. It also provides buttons to increase or
- * decrease the quantity, and a button to remove the item from the cart.
+ * The component receives an object with a `product` and a `qty` as a prop.
+ * It renders the product title, price, and quantity, and provides buttons
+ * to increment, decrement, and remove the item from the cart.
  *
- * @param {ICartitemComponentProps} props - The props for the component.
- * @param {ReturnType<typeof useCartListHook>["data"][number]} props.item - The cart item data, including product details and quantity.
+ * @param {ICartitemComponentProps} props - The props object containing the cart item.
+ * @param {Product} props.item.product - The product object.
+ * @param {number} props.item.qty - The quantity of the product in the cart.
  *
- * @returns {JSX.Element} A JSX element representing the cart item component.
+ * @returns {JSX.Element} A JSX element representing the cart item.
  */
 const CartItemComponent = ({ item }: ICartitemComponentProps): JSX.Element => {
+  const { removeItem, decreaseQuantity, increaseQuantity } = useCartStore();
+
+  const handleRemoveItem = useCallback(
+    (id: Product["id"]) => {
+      removeItem(id);
+    },
+    [removeItem]
+  );
+
+  const handleDecreaseQty = useCallback(
+    (id: Product["id"]) => {
+      decreaseQuantity(id);
+    },
+    [decreaseQuantity]
+  );
+
+  const handleIncreaseQty = useCallback(
+    (id: Product["id"]) => {
+      increaseQuantity(id);
+    },
+    [increaseQuantity]
+  );
+
   return (
     <div className="flex flex-row items-center justify-between mb-4">
-      <div className="flex flex-row items-center gap-4">
+      <div className="flex flex-1 flex-row items-center gap-4">
         <CartImageComponent src={item.product.images[0]} />
         <div>
           <TypographyComponent as="h2" className="text-lg font-bold">
@@ -30,16 +57,23 @@ const CartItemComponent = ({ item }: ICartitemComponentProps): JSX.Element => {
           </TypographyComponent>
         </div>
       </div>
-      <div className="flex items-center justify-end">
-        <ButtonComponent className="mr-4">
+      <div className="flex flex-1 items-center justify-end">
+        <ButtonComponent
+          className="mr-4"
+          onClick={() => handleRemoveItem(item.product.id)}
+        >
           <DeleteIcon className="dark:invert" />
         </ButtonComponent>
-        <ButtonComponent>-</ButtonComponent>
+        <ButtonComponent onClick={() => handleDecreaseQty(item.product.id)}>
+          -
+        </ButtonComponent>
         <TypographyComponent as="span" className="px-2">
           {item.qty}
         </TypographyComponent>
-        <ButtonComponent>+</ButtonComponent>
-        <TypographyComponent as="span" className="pl-16">
+        <ButtonComponent onClick={() => handleIncreaseQty(item.product.id)}>
+          +
+        </ButtonComponent>
+        <TypographyComponent as="span" className="pl-16 min-w-32 text-right">
           ${item.qty * item.product.price}
         </TypographyComponent>
       </div>

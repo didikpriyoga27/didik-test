@@ -1,9 +1,8 @@
-import { CartIcon } from "@/components/atoms/Icons";
+import CartButtonComponent from "@/components/molecules/CartButton";
 import DarkModeToggleComponent from "@/components/molecules/DarkModeToggle/DarkModeToggle.component";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactElement, Suspense } from "react";
-import ButtonComponent from "../../atoms/Button";
 import SearchInputComponent from "../../molecules/SearchInput";
 import { IHeaderComponent, IHeaderComponentProps } from "./type";
 
@@ -54,11 +53,7 @@ const HeaderComponent = ({
               <SearchInputComponent />
             </Suspense>
           )}
-          {renderedComponent.includes("cart") && (
-            <ButtonComponent href={"/cart"}>
-              <CartIcon className="dark:invert" />
-            </ButtonComponent>
-          )}
+          {renderedComponent.includes("cart") && <CartButtonComponent />}
           {renderedComponent.includes("dark-mode-toggle") && (
             <DarkModeToggleComponent />
           )}

@@ -2,7 +2,9 @@
 
 import ButtonComponent from "@/components/atoms/Button";
 import { CartIcon, DeleteIcon, EditIcon } from "@/components/atoms/Icons";
-import { createColumnHelper } from "@tanstack/react-table";
+import useToastHook from "@/hooks/useToast.hook";
+import { useCartStore } from "@/stores/cart";
+import { CellContext, createColumnHelper } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import { useCallback, useMemo, useRef, useState } from "react";
 import ProductImageComponent from "../components/ProductImage";
@@ -29,6 +31,34 @@ const columnHelper = createColumnHelper<Column>();
 const useProductListHook = () => {
   const selectedIdRef = useRef<number>(0);
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
+
+  const { addItem } = useCartStore();
+  const { successMessage, errorMessage } = useToastHook();
+
+  const handleAddItem = useCallback(
+    async (info: CellContext<Column, unknown>) => {
+      try {
+        addItem({
+          product: {
+            id: info.row.original.id,
+            category: info.row.original.category,
+            description: info.row.original.description,
+            images: info.row.original.images,
+            price: info.row.original.price,
+            title: info.row.original.title,
+            creationAt: info.row.original.creationAt,
+            updatedAt: info.row.original.updatedAt,
+          },
+          qty: 1,
+        });
+        successMessage(`${info.row.original.title} added to cart`);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (_error) {
+        errorMessage("Failed to add product to cart");
+      }
+    },
+    [addItem, errorMessage, successMessage]
+  );
 
   const queryProducts = useQueryProductsHook();
 
@@ -95,7 +125,7 @@ const useProductListHook = () => {
             <ButtonComponent href={`/products/${info.row.original.id}`}>
               <EditIcon className="dark:invert" />
             </ButtonComponent>
-            <ButtonComponent>
+            <ButtonComponent onClick={() => handleAddItem(info)}>
               <CartIcon className="dark:invert" />
             </ButtonComponent>
             <ButtonComponent
@@ -107,7 +137,7 @@ const useProductListHook = () => {
         ),
       }),
     ],
-    [handleDeleteOnClick]
+    [handleAddItem, handleDeleteOnClick]
   );
 
   return {
