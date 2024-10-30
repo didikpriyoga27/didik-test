@@ -13,7 +13,7 @@ import CartListComponent from "./components/CartList";
 const Cart = (): ReactElement => {
   return (
     <div className="min-h-screen bg-background dark:bg-foreground py-4">
-      <HeaderComponent />
+      <HeaderComponent hiddenComponent={["search", "cart"]} />
       <CartListComponent />
       <CartFooterComponent />
     </div>
