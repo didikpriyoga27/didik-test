@@ -46,7 +46,7 @@ const ProductListComponent = (): JSX.Element => {
           isShowLoading={productList.isShowLoading}
         />
       </table>
-      <ProductPaginationComponent table={table} />
+      <ProductPaginationComponent />
       {productList.isShowDeleteModal && productList.selectedProduct && (
         <DeleteProductModal
           selectedProduct={productList.selectedProduct}

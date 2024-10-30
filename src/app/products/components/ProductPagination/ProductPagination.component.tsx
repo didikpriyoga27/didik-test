@@ -1,26 +1,71 @@
 import ButtonComponent from "@/components/atoms/Button";
 import TypographyComponent from "@/components/atoms/Typography";
-import { IProductPaginationComponentProps } from "./type";
+import useQueryStringHook from "@/hooks/useQueryString.hook";
 
 /**
- * A component that renders a pagination control for a table.
+ * A component that renders pagination controls for the products page.
  *
- * The component displays first, previous, next, and last page buttons,
- * as well as a page number input and a page size select.
+ * This component utilizes the `useQueryStringHook` to determine the current page number
+ * from the URL query string and renders pagination buttons accordingly.
+ * It includes the following elements:
+ * - A "Previous" button ("<") to navigate to the previous page.
+ * - Buttons for pages 1 and 2, if applicable, to quickly navigate to these pages.
+ * - A "..." text to indicate skipped pages, if applicable.
+ * - A current page indicator displaying the current page number.
+ * - A "Next" button (">") to navigate to the next page.
  *
- * @param {IProductPaginationComponentProps} props - The props object, which contains a
- * `table` property that is an instance of `Table` from `@tanstack/react-table`.
+ * The buttons update the URL query string to reflect the selected page number.
  */
-function ProductPaginationComponent({
-  table,
-}: IProductPaginationComponentProps) {
+function ProductPaginationComponent() {
+  const { getQueryString } = useQueryStringHook();
+
   return (
     <section className="flex items-center justify-end gap-2">
-      <ButtonComponent>{"<"}</ButtonComponent>
+      <ButtonComponent
+        onClick={() =>
+          (window.location.href = `/products?page=${
+            Number(getQueryString("page")) - 1
+          }`)
+        }
+      >
+        &lt;
+      </ButtonComponent>
+      {Number(getQueryString("page")) > 1 && (
+        <ButtonComponent
+          onClick={() => (window.location.href = "/products?page=1")}
+        >
+          1
+        </ButtonComponent>
+      )}
+      {Number(getQueryString("page")) > 2 && (
+        <ButtonComponent
+          onClick={() => (window.location.href = "/products?page=2")}
+        >
+          2
+        </ButtonComponent>
+      )}
+      {Number(getQueryString("page")) > 3 && "..."}
       <TypographyComponent as="span" className="flex items-center gap-1">
-        <strong>{table.getState().pagination.pageIndex}</strong>
+        <strong>{getQueryString("page") ?? 1}</strong>
       </TypographyComponent>
-      <ButtonComponent>{">"}</ButtonComponent>
+      <ButtonComponent
+        onClick={() =>
+          (window.location.href = `/products?page=${
+            Number(getQueryString("page")) + 1
+          }`)
+        }
+      >
+        {Number(getQueryString("page")) + 1}
+      </ButtonComponent>
+      <ButtonComponent
+        onClick={() =>
+          (window.location.href = `/products?page=${
+            Number(getQueryString("page")) + 1
+          }`)
+        }
+      >
+        {">"}
+      </ButtonComponent>
     </section>
   );
 }

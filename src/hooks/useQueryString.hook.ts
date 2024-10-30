@@ -16,6 +16,13 @@ const useQueryStringHook = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const getQueryString = useCallback(
+    (name: string) => {
+      return searchParams.get(name);
+    },
+    [searchParams]
+  );
+
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -40,6 +47,7 @@ const useQueryStringHook = () => {
 
   return {
     createQueryString,
+    getQueryString,
     setSearchQueryString,
   };
 };
