@@ -22,27 +22,15 @@ function ProductPaginationComponent() {
   return (
     <section className="flex items-center justify-end gap-2">
       <ButtonComponent
-        onClick={() =>
-          (window.location.href = `/products?page=${
-            Number(getQueryString("page")) - 1
-          }`)
-        }
+        href={`/products?page=${Number(getQueryString("page")) - 1}`}
       >
         &lt;
       </ButtonComponent>
       {Number(getQueryString("page")) > 1 && (
-        <ButtonComponent
-          onClick={() => (window.location.href = "/products?page=1")}
-        >
-          1
-        </ButtonComponent>
+        <ButtonComponent href="/products?page=1">1</ButtonComponent>
       )}
       {Number(getQueryString("page")) > 2 && (
-        <ButtonComponent
-          onClick={() => (window.location.href = "/products?page=2")}
-        >
-          2
-        </ButtonComponent>
+        <ButtonComponent href="/products?page=2">2</ButtonComponent>
       )}
       <TypographyComponent>
         {Number(getQueryString("page")) > 3 && "..."}
@@ -51,20 +39,12 @@ function ProductPaginationComponent() {
         <strong>{(Number(getQueryString("page")) || 1) ?? 1}</strong>
       </TypographyComponent>
       <ButtonComponent
-        onClick={() =>
-          (window.location.href = `/products?page=${
-            (Number(getQueryString("page")) || 1) + 1
-          }`)
-        }
+        href={`/products?page=${(Number(getQueryString("page")) || 1) + 1}`}
       >
         {(Number(getQueryString("page")) || 1) + 1}
       </ButtonComponent>
       <ButtonComponent
-        onClick={() =>
-          (window.location.href = `/products?page=${
-            (Number(getQueryString("page")) || 1) + 1
-          }`)
-        }
+        href={`/products?page=${(Number(getQueryString("page")) || 1) + 1}`}
       >
         {">"}
       </ButtonComponent>
