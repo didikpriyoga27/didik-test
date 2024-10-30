@@ -1,5 +1,15 @@
 import { ReactElement } from "react";
 
+/**
+ * A basic textarea component.
+ *
+ * @example
+ * <TextAreaComponent />
+ *
+ * @param {React.InputHTMLAttributes<HTMLTextAreaElement>} props - The props for the textarea component.
+ *
+ * @returns {ReactElement} A JSX element representing the textarea component.
+ */
 const TextAreaComponent = (
   props: React.InputHTMLAttributes<HTMLTextAreaElement>
 ): ReactElement => {

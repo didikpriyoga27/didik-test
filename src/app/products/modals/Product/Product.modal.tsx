@@ -1,6 +1,6 @@
 import ButtonComponent from "@/components/atoms/Button";
 import InputComponent from "@/components/atoms/Input";
-import TextAreaComponent from "@/components/atoms/TextArea/TextArea.component";
+import TextAreaComponent from "@/components/atoms/TextArea";
 import TypographyComponent from "@/components/atoms/Typography";
 import useToastHook from "@/hooks/useToast.hook";
 import { zodResolver } from "@hookform/resolvers/zod";
