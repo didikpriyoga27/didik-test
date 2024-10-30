@@ -44,9 +44,9 @@ const ProductModal = ({
     defaultValues: selectedProduct
       ? {
           title: selectedProduct.title,
-          price: selectedProduct.price,
+          price: String(selectedProduct.price),
           description: selectedProduct.description,
-          categoryId: selectedProduct.category.id,
+          categoryId: String(selectedProduct.category.id),
         }
       : undefined,
   });
