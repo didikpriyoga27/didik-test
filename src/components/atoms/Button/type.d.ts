@@ -6,4 +6,5 @@ export interface IButtonComponentProps {
   children?: ReactNode;
   className?: string;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  disabled?: ButtonHTMLAttributes<HTMLButtonElement>["disabled"];
 }

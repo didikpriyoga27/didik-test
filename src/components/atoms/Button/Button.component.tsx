@@ -28,6 +28,7 @@ const ButtonComponent = ({
   href,
   className,
   type,
+  disabled,
 }: IButtonComponentProps): ReactElement => {
   const defaultClassName =
     "bg-gray-200 dark:bg-gray-800 rounded-full py-2 px-4 line-clamp-1 text-foreground dark:text-background";
@@ -41,7 +42,12 @@ const ButtonComponent = ({
     );
   }
   return (
-    <button type={type} onClick={onClick} className={combinedClassName}>
+    <button
+      disabled={disabled}
+      type={type}
+      onClick={onClick}
+      className={combinedClassName}
+    >
       {children}
     </button>
   );

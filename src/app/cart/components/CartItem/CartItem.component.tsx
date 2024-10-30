@@ -64,7 +64,11 @@ const CartItemComponent = ({ item }: ICartitemComponentProps): JSX.Element => {
         >
           <DeleteIcon className="dark:invert" />
         </ButtonComponent>
-        <ButtonComponent onClick={() => handleDecreaseQty(item.product.id)}>
+        <ButtonComponent
+          onClick={() => handleDecreaseQty(item.product.id)}
+          disabled={item.qty === 1}
+          className={"disabled:opacity-50"}
+        >
           -
         </ButtonComponent>
         <TypographyComponent as="span" className="px-2">
