@@ -46,21 +46,21 @@ function ProductPaginationComponent() {
       )}
       {Number(getQueryString("page")) > 3 && "..."}
       <TypographyComponent as="span" className="flex items-center gap-1">
-        <strong>{getQueryString("page") ?? 1}</strong>
+        <strong>{(Number(getQueryString("page")) || 1) ?? 1}</strong>
       </TypographyComponent>
       <ButtonComponent
         onClick={() =>
           (window.location.href = `/products?page=${
-            Number(getQueryString("page")) + 1
+            (Number(getQueryString("page")) || 1) + 1
           }`)
         }
       >
-        {Number(getQueryString("page")) + 1}
+        {(Number(getQueryString("page")) || 1) + 1}
       </ButtonComponent>
       <ButtonComponent
         onClick={() =>
           (window.location.href = `/products?page=${
-            Number(getQueryString("page")) + 1
+            (Number(getQueryString("page")) || 1) + 1
           }`)
         }
       >

@@ -29,7 +29,7 @@ const useQueryProductsHook = () => {
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const search = searchParams.get("search");
-  const page = Number(searchParams.get("page") ?? 1);
+  const page = Number(searchParams.get("page") ?? 1) || 1;
   const limit = Number(searchParams.get("limit") ?? 5);
   const offset = (page - 1) * limit;
 
