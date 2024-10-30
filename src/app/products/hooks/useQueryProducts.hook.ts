@@ -6,19 +6,21 @@ import { useCallback } from "react";
 import { Product } from "../type";
 
 /**
- * A custom hook for querying products from the API.
+ * A hook for fetching the list of products based on search query and pagination.
  *
- * This hook manages pagination, search functionality, and data fetching
- * for products using React Query. It provides the current page, limit,
- * and a set of functions to navigate between pages.
- *
- * @returns {Object} An object containing:
- * - productsData: The list of fetched products.
+ * The hook returns an object with the following properties:
+ * - productsData: The list of products.
+ * - refetch: A function to refetch the data.
  * - page: The current page number.
- * - limit: The number of products per page.
- * - setPage: A function to set the current page.
- * - incrementPage: A function to increment the current page.
- * - decrementPage: A function to decrement the current page.
+ * - limit: The current limit of items per page.
+ * - setPage: A function to set the current page number.
+ * - incrementPage: A function to increment the current page number.
+ * - decrementPage: A function to decrement the current page number.
+ * - isShowLoading: A boolean indicating whether the data is being fetched or not.
+ *
+ * The hook also handles the pagination by updating the URL query string.
+ *
+ * @returns {Object} An object with the properties as described above.
  */
 const useQueryProductsHook = () => {
   const router = useRouter();
@@ -54,7 +56,12 @@ const useQueryProductsHook = () => {
     return response.data;
   }, [baseUrl, limit, offset, search]);
 
-  const { data: productsData, refetch } = useQuery<Product[]>({
+  const {
+    data: productsData,
+    refetch,
+    isLoading,
+    isRefetching,
+  } = useQuery<Product[]>({
     queryKey: ["products", page, limit, search],
     queryFn: fetchProducts,
     placeholderData: keepPreviousData,
@@ -68,6 +75,7 @@ const useQueryProductsHook = () => {
     setPage,
     incrementPage,
     decrementPage,
+    isShowLoading: isLoading || isRefetching,
   };
 };
 

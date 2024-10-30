@@ -143,6 +143,7 @@ const useProductListHook = () => {
     isShowDeleteModal,
     selectedProduct: selectedProductRef.current,
     setIsShowDeleteModal,
+    isShowLoading: queryProducts.isShowLoading,
   };
 };
 

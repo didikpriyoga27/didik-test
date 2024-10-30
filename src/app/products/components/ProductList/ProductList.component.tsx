@@ -38,7 +38,10 @@ const ProductListComponent = (): JSX.Element => {
     <section className="w-11/12 mx-auto">
       <table className="w-full bg-slate-800 dark:bg-slate-600 text-background my-4 rounded-md">
         <TableHeaderComponent table={table} />
-        <TableBodyComponent table={table} />
+        <TableBodyComponent
+          table={table}
+          isShowLoading={productList.isShowLoading}
+        />
       </table>
       <ProductPaginationComponent table={table} />
       {productList.isShowDeleteModal && productList.selectedProduct && (
