@@ -2,6 +2,7 @@
 
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import useProductListHook from "../../hooks/useProductList.hook";
+import DeleteProductModal from "../../modals/DeleteProduct";
 import ProductPaginationComponent from "../ProductPagination";
 import TableBodyComponent from "./components/TableBody";
 import TableHeaderComponent from "./components/TableHeader";
@@ -25,10 +26,11 @@ import TableHeaderComponent from "./components/TableHeader";
  * @returns {JSX.Element} A JSX element representing the table component.
  */
 const ProductListComponent = (): JSX.Element => {
-  const { data, columns } = useProductListHook();
+  const productList = useProductListHook();
+
   const table = useReactTable({
-    data,
-    columns,
+    data: productList.data,
+    columns: productList.columns,
     getCoreRowModel: getCoreRowModel(),
   });
 
@@ -39,6 +41,12 @@ const ProductListComponent = (): JSX.Element => {
         <TableBodyComponent table={table} />
       </table>
       <ProductPaginationComponent table={table} />
+      {productList.isShowDeleteModal && (
+        <DeleteProductModal
+          selectedId={productList.selectedId}
+          setIsShowDeleteModal={productList.setIsShowDeleteModal}
+        />
+      )}
     </section>
   );
 };
