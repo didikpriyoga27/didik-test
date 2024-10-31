@@ -3,6 +3,8 @@
 import ButtonComponent from "@/components/atoms/Button";
 import TitleComponent from "@/components/atoms/Title";
 import TypographyComponent from "@/components/atoms/Typography";
+import lottie from "lottie-web";
+import { useEffect, useRef } from "react";
 import useCartListHook from "../../hooks/useCartList.hook";
 import CartItemComponent from "../CartItem";
 
@@ -17,11 +19,27 @@ import CartItemComponent from "../CartItem";
  */
 const CartListComponent = (): JSX.Element => {
   const { data } = useCartListHook();
+
+  const animationContainer = useRef(null);
+
+  useEffect(() => {
+    if (animationContainer.current) {
+      lottie.loadAnimation({
+        container: animationContainer.current,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "/empty_cart.json",
+      });
+    }
+  }, [data.length]);
+
   return (
     <section className="w-11/12 mx-auto space-y-4">
       <TitleComponent>Cart</TitleComponent>
       {data.length === 0 ? (
         <div className="items-center flex flex-col space-y-4">
+          <div ref={animationContainer}></div>
           <TypographyComponent>Your cart is empty</TypographyComponent>
           <ButtonComponent onClick={() => (window.location.href = "/products")}>
             Go to Products
