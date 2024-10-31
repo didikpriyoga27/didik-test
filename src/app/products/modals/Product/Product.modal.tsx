@@ -115,7 +115,6 @@ const ProductModal = ({
         images: watch("uploadedImages"),
       };
 
-      console.log(dataSubmit);
       if (selectedProduct) {
         return handleUpdateProduct(dataSubmit);
       }
@@ -123,8 +122,6 @@ const ProductModal = ({
     },
     [handleCreateProduct, handleUpdateProduct, selectedProduct, watch]
   );
-
-  console.log(errors);
 
   return (
     <ModalComponent>
