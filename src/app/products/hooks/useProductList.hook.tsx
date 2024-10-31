@@ -51,13 +51,15 @@ const useProductListHook = () => {
           },
           qty: 1,
         });
-        successMessage(`${info.row.original.title} added to cart`);
+        successMessage(
+          `${info.row.original.title} ${t("products:successAddedToCart")}`
+        );
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (_error) {
-        errorMessage("Failed to add product to cart");
+        errorMessage(t("products:errorAddedToCart"));
       }
     },
-    [addItem, errorMessage, successMessage]
+    [addItem, errorMessage, successMessage, t]
   );
 
   const queryProducts = useQueryProductsHook();

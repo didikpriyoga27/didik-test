@@ -2,6 +2,7 @@ import ButtonComponent from "@/components/atoms/Button";
 import ModalComponent from "@/components/atoms/Modal";
 import TypographyComponent from "@/components/atoms/Typography";
 import useToastHook from "@/hooks/useToast.hook";
+import useTranslationHook from "@/i18n/useTranslation.hook";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
 import useMutationProductHook from "../../hooks/useMutationProduct.hook";
@@ -23,6 +24,7 @@ const DeleteProductModal = ({
   selectedProduct,
   setIsShowDeleteModal,
 }: IDeleteProductModalProps): JSX.Element => {
+  const { t } = useTranslationHook();
   const { mutateDeleteProduct } = useMutationProductHook();
   const { successMessage, errorMessage } = useToastHook();
 
@@ -33,18 +35,19 @@ const DeleteProductModal = ({
       .then(() => {
         queryClient.invalidateQueries({ queryKey: ["products"] });
         setIsShowDeleteModal(false);
-        successMessage("Product deleted successfully");
+        successMessage(t("products:successDeletedProduct"));
       })
       .catch(() => {
-        errorMessage("Failed to delete product");
+        errorMessage(t("products:errorDeletedProduct"));
       });
   }, [
     errorMessage,
     mutateDeleteProduct,
     queryClient,
-    selectedProduct,
+    selectedProduct.id,
     setIsShowDeleteModal,
     successMessage,
+    t,
   ]);
 
   return (

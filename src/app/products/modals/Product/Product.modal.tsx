@@ -67,11 +67,11 @@ const ProductModal = ({
         .then(() => {
           setIsShowProductModal(false);
           refetch();
-          successMessage("Product updated successfully");
+          successMessage(t("products:successUpdatedProduct"));
         })
         .catch(() => {
           setIsShowProductModal(false);
-          errorMessage("Failed to update product");
+          errorMessage(t("products:errorUpdatedProduct"));
         });
     },
     [
@@ -81,6 +81,7 @@ const ProductModal = ({
       selectedProduct,
       setIsShowProductModal,
       successMessage,
+      t,
     ]
   );
 
@@ -90,11 +91,11 @@ const ProductModal = ({
         .then(() => {
           setIsShowProductModal(false);
           refetch();
-          successMessage("Product created successfully");
+          successMessage(t("products:successCreatedProduct"));
         })
         .catch(() => {
           setIsShowProductModal(false);
-          errorMessage("Failed to create product");
+          errorMessage(t("products:errorCreatedProduct"));
         });
     },
     [
@@ -103,6 +104,7 @@ const ProductModal = ({
       refetch,
       setIsShowProductModal,
       successMessage,
+      t,
     ]
   );
 

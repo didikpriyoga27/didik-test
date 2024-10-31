@@ -3,6 +3,7 @@
 import ButtonComponent from "@/components/atoms/Button";
 import TypographyComponent from "@/components/atoms/Typography";
 import useToastHook from "@/hooks/useToast.hook";
+import useTranslationHook from "@/i18n/useTranslation.hook";
 import { useCartStore } from "@/stores/cart";
 import { useCallback } from "react";
 import useCartListHook from "../../hooks/useCartList.hook";
@@ -17,6 +18,7 @@ import useCartListHook from "../../hooks/useCartList.hook";
  * or null if there are no items in the cart.
  */
 const CartFooterComponent = () => {
+  const { t } = useTranslationHook();
   const { data } = useCartListHook();
   const { removeAll } = useCartStore();
   const { successMessage } = useToastHook();
@@ -28,10 +30,8 @@ const CartFooterComponent = () => {
 
   const handleSubmit = useCallback(() => {
     removeAll();
-    successMessage(
-      "Your purchase has been successfully completed. We will send you an email with the details."
-    );
-  }, [removeAll, successMessage]);
+    successMessage(t("cart:successPurchase"));
+  }, [removeAll, successMessage, t]);
 
   if (data.length === 0) {
     return null;
