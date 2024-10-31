@@ -1,4 +1,5 @@
 import { TanstackQueryProvider, ToastProvider } from "@/providers";
+import WagmiProvider from "@/providers/wagmi/Wagmi.provider";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import localFont from "next/font/local";
@@ -44,9 +45,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class">
-          <TanstackQueryProvider>
-            <ToastProvider>{children}</ToastProvider>
-          </TanstackQueryProvider>
+          <WagmiProvider>
+            <TanstackQueryProvider>
+              <ToastProvider>{children}</ToastProvider>
+            </TanstackQueryProvider>
+          </WagmiProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -130,7 +130,7 @@ const useProductListHook = () => {
         header: "Actions",
         size: 120,
         cell: (info) => (
-          <div className="flex gap-2 justify-start flex-wrap">
+          <div className="flex gap-2 justify-center flex-wrap">
             <ButtonComponent
               className="p-1"
               variant="info"

@@ -2,6 +2,7 @@ import HeaderComponent from "@/components/organisms/Header";
 import { ReactElement } from "react";
 import CartFooterComponent from "./components/CartFooter";
 import CartListComponent from "./components/CartList";
+import WagmiDetailComponent from "./components/WagmiDetail";
 
 /**
  * A component that renders the cart page.
@@ -16,6 +17,7 @@ const Cart = (): ReactElement => {
       <HeaderComponent hiddenComponent={["search", "cart"]} />
       <CartListComponent />
       <CartFooterComponent />
+      <WagmiDetailComponent />
     </div>
   );
 };

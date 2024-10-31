@@ -14,7 +14,7 @@ import ProductListComponent from "./components/ProductList";
 const Products = (): ReactElement => {
   return (
     <div className="min-h-screen bg-background dark:bg-foreground py-4">
-      <HeaderComponent />
+      <HeaderComponent hiddenComponent={["wagmi"]} />
       <ProductHeaderComponent />
       <Suspense>
         <ProductListComponent />

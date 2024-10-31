@@ -1,3 +1,4 @@
+import WagmiButtonComponent from "@/app/cart/components/WagmiButton";
 import CartButtonComponent from "@/components/molecules/CartButton";
 import DarkModeToggleComponent from "@/components/molecules/DarkModeToggle/DarkModeToggle.component";
 import Image from "next/image";
@@ -27,6 +28,7 @@ const HeaderComponent = ({
     "search",
     "cart",
     "dark-mode-toggle",
+    "wagmi",
   ];
   const renderedComponent = allComponent.filter(
     (component) => !hiddenComponent.includes(component)
@@ -59,6 +61,7 @@ const HeaderComponent = ({
           {renderedComponent.includes("dark-mode-toggle") && (
             <DarkModeToggleComponent />
           )}
+          {renderedComponent.includes("wagmi") && <WagmiButtonComponent />}
         </div>
       </div>
     </header>
