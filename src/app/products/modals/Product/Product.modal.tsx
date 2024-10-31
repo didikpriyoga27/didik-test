@@ -4,6 +4,7 @@ import ModalComponent from "@/components/atoms/Modal";
 import TextAreaComponent from "@/components/atoms/TextArea";
 import TypographyComponent from "@/components/atoms/Typography";
 import useToastHook from "@/hooks/useToast.hook";
+import useTranslationHook from "@/i18n/useTranslation.hook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
@@ -55,6 +56,7 @@ const ProductModal = ({
       : undefined,
   });
 
+  const { t } = useTranslationHook();
   const { mutateCreateProduct, mutateUpdateProduct } = useMutationProductHook();
   const { refetch } = useQueryProductsHook();
   const { successMessage, errorMessage } = useToastHook();
@@ -126,7 +128,9 @@ const ProductModal = ({
     <ModalComponent>
       <div className="flex justify-between items-center mb-2">
         <TypographyComponent as="h2" className="text-lg font-bold">
-          {selectedProduct ? "Edit Product" : "Add Product"}
+          {selectedProduct
+            ? t("products:editProduct")
+            : t("products:addProduct")}
         </TypographyComponent>
         <ButtonComponent
           onClick={() => {
@@ -143,12 +147,12 @@ const ProductModal = ({
         className="overflow-y-auto max-h-[calc(100vh-200px)] pr-4"
       >
         <TypographyComponent as="label">
-          Title:
+          {t("products:title")}:
           <InputComponent
             type="text"
             {...register("title")}
             className="block w-full bg-transparent my-2 p-2 border rounded"
-            placeholder="Input Title"
+            placeholder={t("products:input") + " " + t("products:title")}
           />
           {errors.title && (
             <TypographyComponent
@@ -160,12 +164,12 @@ const ProductModal = ({
           )}
         </TypographyComponent>
         <TypographyComponent as="label">
-          Price:
+          {t("products:price")}:
           <InputComponent
             type="number"
             {...register("price")}
             className="block w-full bg-transparent my-2 p-2 border rounded"
-            placeholder="Input Price"
+            placeholder={t("products:input") + " " + t("products:price")}
           />
           {errors.price && (
             <TypographyComponent
@@ -177,11 +181,11 @@ const ProductModal = ({
           )}
         </TypographyComponent>
         <TypographyComponent as="label">
-          Description:
+          {t("products:description")}:
           <TextAreaComponent
             {...register("description")}
             className="block w-full bg-transparent my-2 p-2 border rounded"
-            placeholder="Input Description"
+            placeholder={t("products:input") + " " + t("products:description")}
           />
           {errors.description && (
             <TypographyComponent

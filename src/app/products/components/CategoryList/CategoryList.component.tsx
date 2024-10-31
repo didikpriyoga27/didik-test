@@ -1,5 +1,6 @@
 import SelectComponent from "@/components/atoms/Select";
 import TypographyComponent from "@/components/atoms/Typography";
+import useTranslationHook from "@/i18n/useTranslation.hook";
 import useQueryCategoriesHook from "../../hooks/useQueryCategories.hook";
 import { ICategoryListComponentProps } from "./type";
 
@@ -17,10 +18,11 @@ const CategoryListComponent = ({
   errors,
   defaultValue,
 }: ICategoryListComponentProps) => {
+  const { t } = useTranslationHook();
   const { categoryOptions } = useQueryCategoriesHook();
   return (
     <TypographyComponent as="label">
-      Category:
+      {t("products:category")}:
       <SelectComponent
         {...register("categoryId")}
         className="block w-full my-2 p-2 border rounded dark:bg-foreground bg-background"

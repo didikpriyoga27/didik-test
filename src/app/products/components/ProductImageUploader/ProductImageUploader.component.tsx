@@ -2,6 +2,7 @@
 import InputComponent from "@/components/atoms/Input";
 import TypographyComponent from "@/components/atoms/Typography";
 import useParseImageStringHook from "@/hooks/useParseImageString.hook";
+import useTranslationHook from "@/i18n/useTranslation.hook";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { IProductImageUploaderComponentProps } from "./type";
@@ -28,6 +29,7 @@ const ProductImageUploaderComponent = ({
   setValue,
   defaultValue = null,
 }: IProductImageUploaderComponentProps) => {
+  const { t } = useTranslationHook();
   const { parseImageString } = useParseImageStringHook();
   const parsedDefaultValue = parseImageString(defaultValue || "");
 
@@ -67,12 +69,12 @@ const ProductImageUploaderComponent = ({
   return (
     <>
       <TypographyComponent as="label">
-        Image:
+        {t("products:image")}:
         <InputComponent
           type="file"
           {...register("images")}
           className="block w-full bg-transparent my-2 p-2 border rounded"
-          placeholder="Input Image"
+          placeholder={t("products:input") + " " + t("products:image")}
           accept="image/*"
           onChange={(e) => {
             register("images").onChange(e);

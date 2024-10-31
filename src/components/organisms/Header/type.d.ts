@@ -3,6 +3,7 @@ export type IHeaderComponent =
   | "search"
   | "cart"
   | "dark-mode-toggle"
+  | "language-toggle"
   | "wagmi";
 
 export interface IHeaderComponentProps {

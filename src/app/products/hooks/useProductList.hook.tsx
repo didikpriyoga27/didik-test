@@ -3,6 +3,7 @@
 import ButtonComponent from "@/components/atoms/Button";
 import { CartIcon, DeleteIcon, EditIcon } from "@/components/atoms/Icons";
 import useToastHook from "@/hooks/useToast.hook";
+import useTranslationHook from "@/i18n/useTranslation.hook";
 import { useCartStore } from "@/stores/cart";
 import { CellContext, createColumnHelper } from "@tanstack/react-table";
 import dayjs from "dayjs";
@@ -30,6 +31,7 @@ const useProductListHook = () => {
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
   const [isShowEditModal, setIsShowEditModal] = useState(false);
 
+  const { t } = useTranslationHook();
   const { addItem } = useCartStore();
   const { successMessage, errorMessage } = useToastHook();
 
@@ -77,12 +79,12 @@ const useProductListHook = () => {
   const columns = useMemo(
     () => [
       columnHelper.accessor("id", {
-        header: "Product ID",
+        header: t("products:productId"),
         size: 40,
         cell: (info) => "#" + info.getValue(),
       }),
       columnHelper.accessor("images", {
-        header: "Image",
+        header: t("products:image"),
         size: 100,
         cell: (info) => (
           <div className="flex items-center justify-center w-full">
@@ -91,12 +93,12 @@ const useProductListHook = () => {
         ),
       }),
       columnHelper.accessor("title", {
-        header: "Title",
+        header: t("products:title"),
         size: 120,
         cell: (info) => info.getValue(),
       }),
       columnHelper.accessor("description", {
-        header: "Description",
+        header: t("products:description"),
         size: 400,
         cell: (info) => (
           <p title={info.getValue()}>
@@ -107,27 +109,27 @@ const useProductListHook = () => {
         ),
       }),
       columnHelper.accessor("category", {
-        header: "Category",
+        header: t("products:category"),
         size: 80,
         cell: (info) => info.getValue().name,
       }),
       columnHelper.accessor("price", {
-        header: "Price",
+        header: t("products:price"),
         size: 60,
         cell: (info) => "$" + info.getValue(),
       }),
       columnHelper.accessor("creationAt", {
-        header: "Created At",
+        header: t("products:createdAt"),
         size: 80,
         cell: (info) => dayjs(info.getValue()).format("MMM D, YYYY h:mm a"),
       }),
       columnHelper.accessor("updatedAt", {
-        header: "Updated At",
+        header: t("products:updatedAt"),
         size: 80,
         cell: (info) => dayjs(info.getValue()).format("MMM D, YYYY h:mm a"),
       }),
       columnHelper.display({
-        header: "Actions",
+        header: t("products:actions"),
         size: 120,
         cell: (info) => (
           <div className="flex gap-2 justify-center flex-wrap">
@@ -156,7 +158,7 @@ const useProductListHook = () => {
         ),
       }),
     ],
-    [handleAddItem, handleDeleteOnClick, handleEditOnClick]
+    [handleAddItem, handleDeleteOnClick, handleEditOnClick, t]
   );
 
   return {

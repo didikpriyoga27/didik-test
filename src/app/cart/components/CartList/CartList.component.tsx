@@ -3,6 +3,7 @@
 import ButtonComponent from "@/components/atoms/Button";
 import TitleComponent from "@/components/atoms/Title";
 import TypographyComponent from "@/components/atoms/Typography";
+import useTranslationHook from "@/i18n/useTranslation.hook";
 import Lottie from "lottie-react";
 import useCartListHook from "../../hooks/useCartList.hook";
 import CartItemComponent from "../CartItem";
@@ -19,10 +20,11 @@ import emptyCartAnimation from "./empty_cart.json";
  */
 const CartListComponent = (): JSX.Element => {
   const { data } = useCartListHook();
+  const { t } = useTranslationHook();
 
   return (
     <section className="w-11/12 mx-auto space-y-4">
-      <TitleComponent>Cart</TitleComponent>
+      <TitleComponent>{t("commons:cart")}</TitleComponent>
       {data.length === 0 ? (
         <div className="items-center flex flex-col space-y-4">
           <Lottie
@@ -30,9 +32,9 @@ const CartListComponent = (): JSX.Element => {
             className="flex justify-center items-center"
             loop={true}
           />
-          <TypographyComponent>Your cart is empty</TypographyComponent>
+          <TypographyComponent>{t("cart:empty")}</TypographyComponent>
           <ButtonComponent onClick={() => (window.location.href = "/products")}>
-            Go to Products
+            {t("cart:goToProducts")}
           </ButtonComponent>
         </div>
       ) : (

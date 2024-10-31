@@ -3,6 +3,7 @@
 import ButtonComponent from "@/components/atoms/Button";
 import TitleComponent from "@/components/atoms/Title";
 
+import useTranslationHook from "@/i18n/useTranslation.hook";
 import { ReactElement, useState } from "react";
 import ProductModal from "../../modals/Product";
 
@@ -16,16 +17,17 @@ import ProductModal from "../../modals/Product";
  */
 
 const ProductHeaderComponent = (): ReactElement => {
+  const { t } = useTranslationHook();
   const [isShowProductModal, setIsShowProductModal] = useState(false);
 
   return (
     <section className="flex justify-between items-center w-11/12 mx-auto">
-      <TitleComponent>Products</TitleComponent>
+      <TitleComponent>{t("commons:products")}</TitleComponent>
       <ButtonComponent
         variant="info"
         onClick={() => setIsShowProductModal(true)}
       >
-        Add Product
+        {t("products:addProduct")}
       </ButtonComponent>
       {isShowProductModal && (
         <ProductModal setIsShowProductModal={setIsShowProductModal} />

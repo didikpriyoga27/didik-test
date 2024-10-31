@@ -1,6 +1,7 @@
 import WagmiButtonComponent from "@/app/cart/components/WagmiButton";
 import CartButtonComponent from "@/components/molecules/CartButton";
-import DarkModeToggleComponent from "@/components/molecules/DarkModeToggle/DarkModeToggle.component";
+import DarkModeToggleComponent from "@/components/molecules/DarkModeToggle";
+import LanguageToggleComponent from "@/components/molecules/LanguageToggle";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactElement, Suspense } from "react";
@@ -28,6 +29,7 @@ const HeaderComponent = ({
     "search",
     "cart",
     "dark-mode-toggle",
+    "language-toggle",
     "wagmi",
   ];
   const renderedComponent = allComponent.filter(
@@ -60,6 +62,9 @@ const HeaderComponent = ({
           {renderedComponent.includes("cart") && <CartButtonComponent />}
           {renderedComponent.includes("dark-mode-toggle") && (
             <DarkModeToggleComponent />
+          )}
+          {renderedComponent.includes("language-toggle") && (
+            <LanguageToggleComponent />
           )}
           {renderedComponent.includes("wagmi") && <WagmiButtonComponent />}
         </div>
