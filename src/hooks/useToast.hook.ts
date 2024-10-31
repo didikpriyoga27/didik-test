@@ -11,12 +11,13 @@ import { toast } from "react-toastify";
  */
 const useToastHook = () => {
   const successMessage = useCallback(
-    (text: string) => toast(text, { type: "success" }),
+    (text: string) =>
+      toast(text, { type: "success", position: "bottom-right" }),
     []
   );
 
   const errorMessage = useCallback(
-    (text: string) => toast(text, { type: "error" }),
+    (text: string) => toast(text, { type: "error", position: "bottom-right" }),
     []
   );
 
