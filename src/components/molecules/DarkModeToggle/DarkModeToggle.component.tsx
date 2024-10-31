@@ -3,9 +3,14 @@
 import ButtonComponent from "@/components/atoms/Button";
 import { DarkModeIcon } from "@/components/atoms/Icons";
 import { useTheme } from "next-themes";
-import { useCallback } from "react";
+import { ReactElement, useCallback } from "react";
 
-const DarkModeToggleComponent = () => {
+/**
+ * A component for toggling between dark and light theme.
+ *
+ * @returns {ReactElement} A JSX element representing the component.
+ */
+const DarkModeToggleComponent = (): ReactElement => {
   const { theme, systemTheme, setTheme } = useTheme();
 
   const handleToggleTheme = useCallback(() => {

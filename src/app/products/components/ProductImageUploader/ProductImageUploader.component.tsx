@@ -6,6 +6,22 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { IProductImageUploaderComponentProps } from "./type";
 
+/**
+ * A component for uploading and previewing product images.
+ *
+ * This component uses a file input to allow users to upload an image.
+ * Upon uploading, it sends the image to a server endpoint to be stored,
+ * and then displays a preview of the uploaded image. If an error occurs
+ * during the upload, it displays an error message.
+ *
+ * @param {IProductImageUploaderComponentProps} props - The props for the component.
+ * @param {UseFormRegister} props.register - The register function from react-hook-form for managing input state.
+ * @param {FieldError} props.errors - The object containing validation errors for the form fields.
+ * @param {SetFieldValue} props.setValue - The function to programmatically set the value of a form field.
+ * @param {string|null} [props.defaultValue=null] - The default image URL for the component, if any.
+ *
+ * @returns {JSX.Element} A JSX element representing the image uploader and preview component.
+ */
 const ProductImageUploaderComponent = ({
   register,
   errors,
